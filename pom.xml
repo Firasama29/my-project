@@ -8,8 +8,8 @@
         <version>2.6.3</version>
     </parent>
 
-    <groupId>com.projectEntity</groupId>
-    <artifactId>my-projectEntity</artifactId>
+    <groupId>com.project</groupId>
+    <artifactId>content-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>my-projectEntity</name>
 

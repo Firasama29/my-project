@@ -1,3 +1,7 @@
+# description
+This project consists of microservices
+    - **content-service** which will display lists of websites, blogs, sites and articles
+    - **user-service** which will handle all user-related functionalities
 # content-service
 a microservice to display, add and manipulate lists of websites, blogs, topics and articles.
 # my-projectEntity

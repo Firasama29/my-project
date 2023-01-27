@@ -1,6 +1,6 @@
-package com.project.repository;
+package com.project.content.repository;
 
-import com.project.entity.Sites;
+import com.project.content.entity.Sites;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface SitesRepository extends JpaRepository<Sites, Long> {

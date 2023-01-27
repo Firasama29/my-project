@@ -1,4 +1,4 @@
-package com.project.entity;
+package com.project.content.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

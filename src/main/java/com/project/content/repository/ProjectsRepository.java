@@ -1,6 +1,6 @@
-package com.project.repository;
+package com.project.content.repository;
 
-import com.project.entity.ProjectEntity;
+import com.project.content.entity.ProjectEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
