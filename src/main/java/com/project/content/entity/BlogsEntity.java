@@ -1,9 +1,7 @@
 package com.project.content.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -11,7 +9,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "blogs")
-public class Blogs implements Serializable {
+public class BlogsEntity implements Serializable {
 
     @Id
     private Long id;
@@ -22,13 +20,11 @@ public class Blogs implements Serializable {
 
     private String author;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tag_id")
-    private List<Tags> tags;
+    private String tags;
 
-    public Blogs() {}
+    public BlogsEntity() {}
 
-    public Blogs(Long id, String url, String description, String author, List<Tags> tags) {
+    public BlogsEntity(Long id, String url, String description, String author, String tags) {
         this.id = id;
         this.url = url;
         this.description = description;
@@ -67,11 +63,11 @@ public class Blogs implements Serializable {
         this.author = author;
     }
 
-    public List<Tags> getTags() {
+    public String getTags() {
         return tags;
     }
 
-    public void setTags(List<Tags> tags) {
+    public void setTags(String tags) {
         this.tags = tags;
     }
 

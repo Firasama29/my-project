@@ -1,12 +1,11 @@
 package com.project.content.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -20,9 +19,13 @@ public class ProjectEntity implements Serializable {
 
     private String description;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "tag_id")
-    private List<Tags> tags;
+    private String tags;
+
+    private LocalDate startDate;
+
+    private LocalDate updatedDate;
+
+    private LocalDate endDate;
 
     private String type;
 
@@ -30,11 +33,14 @@ public class ProjectEntity implements Serializable {
 
     public ProjectEntity(){}
 
-    public ProjectEntity(Long id, String name, String description, List<Tags> tags, String type, String status) {
+    public ProjectEntity(Long id, String name, String description, String tags, LocalDate startDate, LocalDate updatedDate, LocalDate endDate, String type, String status) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.tags = tags;
+        this.startDate = startDate;
+        this.updatedDate = updatedDate;
+        this.endDate = endDate;
         this.type = type;
         this.status = status;
     }
@@ -59,12 +65,36 @@ public class ProjectEntity implements Serializable {
 
     public void setDescription(String description) { this.description = description; }
 
-    public List<Tags> getTags() {
+    public String getTags() {
         return tags;
     }
 
-    public void setTags(List<Tags> tags) {
+    public void setTags(String tags) {
         this.tags = tags;
+    }
+
+    public LocalDate getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(LocalDate startDate) {
+        this.startDate = startDate;
+    }
+
+    public LocalDate getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(LocalDate updatedDate) {
+        this.updatedDate = updatedDate;
+    }
+
+    public LocalDate getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(LocalDate endDate) {
+        this.endDate = endDate;
     }
 
     public String getType() {
@@ -85,11 +115,14 @@ public class ProjectEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "Projects{" +
+        return "ProjectEntity{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", description'" + description + '\'' +
+                ", description='" + description + '\'' +
                 ", tags=" + tags +
+                ", startDate=" + startDate +
+                ", startDate=" + updatedDate +
+                ", endDate=" + endDate +
                 ", type='" + type + '\'' +
                 ", status='" + status + '\'' +
                 '}';

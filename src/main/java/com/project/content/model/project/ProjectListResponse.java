@@ -1,8 +1,8 @@
-package com.project.content.model;
+package com.project.content.model.project;
 
 import java.util.List;
 
-public class ProjectResponse {
+public class ProjectListResponse {
 
     private List<ProjectData> projectData;
 

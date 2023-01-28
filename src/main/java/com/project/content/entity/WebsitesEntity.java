@@ -2,12 +2,14 @@ package com.project.content.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "websites")
-public class Websites implements Serializable {
+public class WebsitesEntity implements Serializable {
 
     @Id
     private Long id;
@@ -18,13 +20,16 @@ public class Websites implements Serializable {
 
     private String description;
 
-    public Websites() {}
+    private String tags;
 
-    public Websites(Long id, String url, String title, String description) {
+    public WebsitesEntity() {}
+
+    public WebsitesEntity(Long id, String url, String title, String description, String tags) {
         this.id = id;
         this.url = url;
         this.title = title;
         this.description = description;
+        this.tags = tags;
     }
 
     public Long getId() {
@@ -59,6 +64,14 @@ public class Websites implements Serializable {
         this.description = description;
     }
 
+    public String getTags() {
+        return tags;
+    }
+
+    public void setTags(String tags) {
+        this.tags = tags;
+    }
+
     @Override
     public String toString() {
         return "Websites{" +
@@ -66,6 +79,7 @@ public class Websites implements Serializable {
                 ", url='" + url + '\'' +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
+                ", description='" + tags + '\'' +
                 '}';
     }
 }

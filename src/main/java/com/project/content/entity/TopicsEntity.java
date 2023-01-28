@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "topics")
-public class Topics implements Serializable {
+public class TopicsEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQUENCE_TOPICS")
@@ -21,9 +21,9 @@ public class Topics implements Serializable {
 
     private String type;
 
-    public Topics() {}
+    public TopicsEntity() {}
 
-    public Topics(Long id, String name, String type) {
+    public TopicsEntity(Long id, String name, String type) {
         this.id = id;
         this.name = name;
         this.type = type;
