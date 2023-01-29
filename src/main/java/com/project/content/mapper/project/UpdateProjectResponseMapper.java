@@ -1,4 +1,4 @@
-package com.project.content.mapper;
+package com.project.content.mapper.project;
 
 import com.project.content.model.project.ProjectRequest;
 import com.project.content.model.project.UpdateProjectResponse;

@@ -19,14 +19,14 @@ public class TopicsEntity implements Serializable {
 
     private String name;
 
-    private String type;
+    private String tags;
 
     public TopicsEntity() {}
 
-    public TopicsEntity(Long id, String name, String type) {
+    public TopicsEntity(Long id, String name, String tags) {
         this.id = id;
         this.name = name;
-        this.type = type;
+        this.tags = tags;
     }
 
     public Long getId() {
@@ -45,12 +45,12 @@ public class TopicsEntity implements Serializable {
         this.name = name;
     }
 
-    public String getType() {
-        return this.type;
+    public String getTags() {
+        return this.tags;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setTags(String tags) {
+        this.tags = tags;
     }
 
     @Override
@@ -58,7 +58,7 @@ public class TopicsEntity implements Serializable {
         return "Topics{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", type='" + type + '\'' +
+                ", type='" + tags + '\'' +
                 '}';
     }
 }

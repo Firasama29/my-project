@@ -1,12 +1,12 @@
 package com.project.content.service;
 
 import com.project.content.entity.ProjectEntity;
-import com.project.content.mapper.DeleteProjectResponseMapper;
-import com.project.content.mapper.ProjectRequestMapper;
-import com.project.content.mapper.PostProjectResponseMapper;
-import com.project.content.mapper.UpdateProjectResponseMapper;
+import com.project.content.mapper.project.DeleteProjectResponseMapper;
+import com.project.content.mapper.project.ProjectRequestMapper;
+import com.project.content.mapper.project.PostProjectResponseMapper;
+import com.project.content.mapper.project.UpdateProjectResponseMapper;
 import com.project.content.model.project.ProjectResponse;
-import com.project.content.mapper.ProjectListMapper;
+import com.project.content.mapper.project.ProjectListMapper;
 import com.project.content.model.project.ProjectRequest;
 import com.project.content.model.project.UpdateProjectResponse;
 import com.project.content.model.project.ProjectData;
@@ -18,9 +18,7 @@ import com.project.content.repository.ProjectsRepository;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
-import static com.project.content.constants.ProjectConstants.COMMA;
 import static com.project.content.constants.ProjectConstants.EXISTING_PROJECT_ERROR_MESSAGE;
 import static com.project.content.constants.ProjectConstants.MISSING_PROJECT_ERROR_MESSAGE;
 
@@ -46,15 +44,16 @@ public class ProjectService {
 
     /** find projects */
     public ProjectListResponse findProjects() {
-        List<ProjectEntity> projectEntities = projectsRepository.findAll();
-        //Project project = !projects.isEmpty() ? projects.stream().findFirst().orElse(null) : new Project();
-        return projectListMapper.map(projectEntities);
+        return projectListMapper.map(projectsRepository.findAll());
     }
 
     /** find a project by id  */
     public ProjectData findProjectById(Long id) {
-        ProjectEntity projectEntityById = projectsRepository.findById(id).orElse(null);
-        return Objects.nonNull(projectEntityById) ? projectListMapper.mapDataById(projectEntityById) : null;
+        Optional<ProjectEntity> projectEntityById = projectsRepository.findById(id);
+        if(!projectEntityById.isPresent()) {
+            throw new ServiceException(MISSING_PROJECT_ERROR_MESSAGE);
+        }
+        return projectListMapper.mapDataById(projectEntityById.get());
     }
 
     /** find a project by name  */

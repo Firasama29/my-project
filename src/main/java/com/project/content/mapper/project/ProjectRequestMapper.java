@@ -1,4 +1,4 @@
-package com.project.content.mapper;
+package com.project.content.mapper.project;
 
 import com.project.content.entity.ProjectEntity;
 import com.project.content.model.project.ProjectRequest;
@@ -20,5 +20,4 @@ public class ProjectRequestMapper {
         projectEntity.setTags(projectRequest.getTags());
         return projectEntity;
     }
-
 }

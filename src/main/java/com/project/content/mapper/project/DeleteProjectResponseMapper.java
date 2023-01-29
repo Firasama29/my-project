@@ -1,4 +1,4 @@
-package com.project.content.mapper;
+package com.project.content.mapper.project;
 
 import com.project.content.model.project.ProjectResponse;
 import org.springframework.stereotype.Component;

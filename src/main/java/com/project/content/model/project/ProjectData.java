@@ -1,6 +1,7 @@
 package com.project.content.model.project;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class ProjectData {
 
@@ -9,7 +10,7 @@ public class ProjectData {
 
     private String description;
 
-    private String[] tags;
+    private List<String> tags;
 
     private LocalDate startDate;
 
@@ -41,11 +42,11 @@ public class ProjectData {
         this.projectName = projectName;
     }
 
-    public String[] getTags() {
+    public List<String> getTags() {
         return tags;
     }
 
-    public void setTags(String[] tags) {
+    public void setTags(List<String> tags) {
         this.tags = tags;
     }
 

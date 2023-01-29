@@ -1,4 +1,4 @@
-package com.project.content.mapper;
+package com.project.content.mapper.project;
 
 import com.project.content.entity.ProjectEntity;
 import com.project.content.model.project.ProjectData;
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static com.project.content.constants.ProjectConstants.COMMA;
+import static com.project.content.utils.ContentUtils.getTags;
 
 @Component
 public class ProjectStatusMapper {
@@ -33,7 +33,7 @@ public class ProjectStatusMapper {
         projectData.setStatus(projectEntity.getStatus());
         projectData.setStartDate(projectEntity.getStartDate());
         projectData.setEndDate(projectEntity.getEndDate());
-        projectData.setTags(Objects.nonNull(projectEntity.getTags()) ? projectEntity.getTags().split(COMMA) : null);
+        projectData.setTags(Objects.nonNull(projectEntity.getTags()) ? getTags(projectEntity.getTags()) : null);
         return projectData;
     }
 }
