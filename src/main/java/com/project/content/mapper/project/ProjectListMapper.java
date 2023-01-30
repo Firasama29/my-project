@@ -32,11 +32,11 @@ public class ProjectListMapper {
     private ProjectData mapProject(ProjectEntity projectEntity) {
         ProjectData projectData = new ProjectData();
         projectData.setProjectId(projectEntity.getId());
-        projectData.setProjectName(projectEntity.getName());
-        projectData.setProjectType(projectEntity.getDescription());
+        projectData.setProject(projectEntity.getName());
+        projectData.setDescription(projectEntity.getDescription());
         projectData.setStatus(projectEntity.getStatus());
         projectData.setStartDate(projectEntity.getStartDate());
-        projectData.setEndDate(projectEntity.getEndDate());
+        projectData.setUpdatedDate(projectEntity.getUpdatedDate());
         projectData.setTags(Objects.nonNull(projectEntity.getTags()) ? getTags(projectEntity.getTags()) : null);
         return projectData;
     }
@@ -45,11 +45,11 @@ public class ProjectListMapper {
     public ProjectData mapDataById(ProjectEntity projectEntity) {
         ProjectData projectData = new ProjectData();
         projectData.setProjectId(projectEntity.getId());
-        projectData.setProjectName(projectEntity.getName());
-        projectData.setProjectType(projectEntity.getDescription());
-        projectData.setStatus(projectEntity.getStatus());
+        projectData.setProject(projectEntity.getName());
+        projectData.setDescription(projectEntity.getDescription());
         projectData.setStartDate(projectEntity.getStartDate());
-        projectData.setEndDate(projectEntity.getEndDate());
+        projectData.setUpdatedDate(projectEntity.getUpdatedDate());
+        projectData.setStatus(projectEntity.getStatus());
         projectData.setTags(Objects.nonNull(projectEntity.getTags()) ? getTags(projectEntity.getTags()) : null);
         return projectData;
     }
@@ -58,11 +58,11 @@ public class ProjectListMapper {
     public ProjectData mapDataByName(ProjectEntity projectEntity) {
         ProjectData projectData = new ProjectData();
         projectData.setProjectId(projectEntity.getId());
-        projectData.setProjectName(projectEntity.getName());
-        projectData.setProjectType(projectEntity.getDescription());
+        projectData.setProject(projectEntity.getName());
+        projectData.setDescription(projectEntity.getDescription());
         projectData.setStatus(projectEntity.getStatus());
         projectData.setStartDate(projectEntity.getStartDate());
-        projectData.setEndDate(projectEntity.getEndDate());
+        projectData.setUpdatedDate(projectEntity.getUpdatedDate());
         projectData.setTags(Objects.nonNull(projectEntity.getTags()) ? getTags(projectEntity.getTags()) : null);
         return projectData;
     }
@@ -70,24 +70,22 @@ public class ProjectListMapper {
     /** map Data object to entity to display an object by id in response */
     public ProjectListResponse mapTagsResponse(List<ProjectEntity> projectEntities) {
         ProjectListResponse projectResponse = new ProjectListResponse();
-        projectResponse.setProjectData(this.mapDataByStatus(projectEntities));
+        projectResponse.setProjectData(this.mapDataByTags(projectEntities));
         return projectResponse;
     }
 //
-    private List<ProjectData> mapDataByStatus(List<ProjectEntity> projectEntities) {
+    private List<ProjectData> mapDataByTags(List<ProjectEntity> projectEntities) {
         return projectEntities.stream().map(this::mapProjectsByTags).collect(Collectors.toList());
     }
 
     private ProjectData mapProjectsByTags(ProjectEntity projectEntity) {
         ProjectData projectData = new ProjectData();
         projectData.setProjectId(projectEntity.getId());
-        projectData.setProjectName(projectEntity.getName());
+        projectData.setProject(projectEntity.getName());
         projectData.setDescription(projectEntity.getDescription());
-        projectData.setProjectType(projectEntity.getType());
         projectData.setStatus(projectEntity.getStatus());
         projectData.setStartDate(projectEntity.getStartDate());
         projectData.setUpdatedDate(projectEntity.getUpdatedDate());
-        projectData.setEndDate(projectEntity.getEndDate());
         projectData.setTags(Objects.nonNull(projectEntity.getTags()) ? getTags(projectEntity.getTags()) : null);
         return projectData;
     }

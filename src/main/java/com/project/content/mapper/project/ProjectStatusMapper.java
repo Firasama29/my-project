@@ -28,11 +28,8 @@ public class ProjectStatusMapper {
     public ProjectData mapByStatus(ProjectEntity projectEntity) {
         ProjectData projectData = new ProjectData();
         projectData.setProjectId(projectEntity.getId());
-        projectData.setProjectName(projectEntity.getName());
-        projectData.setProjectType(projectEntity.getType());
+        projectData.setProject(projectEntity.getName());
         projectData.setStatus(projectEntity.getStatus());
-        projectData.setStartDate(projectEntity.getStartDate());
-        projectData.setEndDate(projectEntity.getEndDate());
         projectData.setTags(Objects.nonNull(projectEntity.getTags()) ? getTags(projectEntity.getTags()) : null);
         return projectData;
     }

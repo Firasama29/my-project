@@ -6,7 +6,7 @@ import java.util.List;
 public class ProjectData {
 
     private Long projectId;
-    private String projectName;
+    private String project;
 
     private String description;
 
@@ -15,10 +15,6 @@ public class ProjectData {
     private LocalDate startDate;
 
     private LocalDate updatedDate;
-
-    private LocalDate endDate;
-
-    private String projectType;
 
     private String status;
 
@@ -34,12 +30,12 @@ public class ProjectData {
         this.projectId = projectId;
     }
 
-    public String getProjectName() {
-        return projectName;
+    public String getProject() {
+        return project;
     }
 
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
+    public void setProject(String project) {
+        this.project = project;
     }
 
     public List<String> getTags() {
@@ -64,22 +60,6 @@ public class ProjectData {
 
     public void setUpdatedDate(LocalDate updatedDate) {
         this.updatedDate = updatedDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
-
-    public String getProjectType() {
-        return projectType;
-    }
-
-    public void setProjectType(String projectType) {
-        this.projectType = projectType;
     }
 
     public String getStatus() {

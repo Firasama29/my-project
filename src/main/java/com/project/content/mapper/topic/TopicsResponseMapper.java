@@ -5,6 +5,7 @@ import com.project.content.model.topics.TopicsData;
 import com.project.content.model.topics.TopicsResponse;
 import org.springframework.stereotype.Component;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -62,6 +63,7 @@ public class TopicsResponseMapper {
         TopicsData topicsData = new TopicsData();
         topicsData.setId(topicsEntity.getId());
         topicsData.setTopic(topicsEntity.getName());
+        topicsData.setTags(Collections.emptyList());
         return topicsData;
     }
 }

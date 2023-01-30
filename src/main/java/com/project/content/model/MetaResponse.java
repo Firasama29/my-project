@@ -1,17 +1,15 @@
-package com.project.content.model.project;
+package com.project.content.model;
 
 import org.springframework.stereotype.Component;
 
 @Component
-public class ProjectResponse {
+public class MetaResponse {
 
     private String message;
 
-    public ProjectResponse() {}
-
+    public MetaResponse() {}
 
     public String getMessage() { return this.message; }
 
     public void setMessage(String message) { this.message = message; }
-
 }

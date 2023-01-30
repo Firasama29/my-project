@@ -1,6 +1,6 @@
 package com.project.content.mapper.project;
 
-import com.project.content.model.project.ProjectResponse;
+import com.project.content.model.MetaResponse;
 import org.springframework.stereotype.Component;
 
 import static com.project.content.constants.ProjectConstants.DELETE_PROJECT_SUCCESS_MESSAGE;
@@ -8,9 +8,9 @@ import static com.project.content.constants.ProjectConstants.DELETE_PROJECT_SUCC
 @Component
 public class DeleteProjectResponseMapper {
 
-    public ProjectResponse map() {
-        ProjectResponse projectResponse = new ProjectResponse();
-        projectResponse.setMessage(DELETE_PROJECT_SUCCESS_MESSAGE);
-        return projectResponse;
+    public MetaResponse map() {
+        MetaResponse metaResponse = new MetaResponse();
+        metaResponse.setMessage(DELETE_PROJECT_SUCCESS_MESSAGE);
+        return metaResponse;
     }
 }

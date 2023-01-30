@@ -5,18 +5,20 @@ import com.project.content.model.project.ProjectRequest;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.Objects;
+
+import static com.project.content.constants.ProjectConstants.PROJECT_PENDING_STATUS;
 
 @Component
-public class ProjectRequestMapper {
+public class PostProjectRequestMapper {
 
     public ProjectEntity map(ProjectRequest projectRequest) {
         ProjectEntity projectEntity = new ProjectEntity();
         projectEntity.setId(projectRequest.getProjectId());
         projectEntity.setName(projectRequest.getProjectName());
         projectEntity.setDescription(projectRequest.getDescription());
-        projectEntity.setType(projectRequest.getType());
-        projectEntity.setStatus(projectRequest.getStatus());
-        projectEntity.setStartDate(LocalDate.parse(projectRequest.getStartDate()));
+        projectEntity.setStatus(PROJECT_PENDING_STATUS);
+        projectEntity.setStartDate(Objects.nonNull(projectRequest.getStartDate()) ? LocalDate.parse(projectRequest.getStartDate()) : null);
         projectEntity.setTags(projectRequest.getTags());
         return projectEntity;
     }

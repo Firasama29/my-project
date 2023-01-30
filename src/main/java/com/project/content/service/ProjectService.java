@@ -1,11 +1,11 @@
 package com.project.content.service;
 
 import com.project.content.entity.ProjectEntity;
-import com.project.content.mapper.project.DeleteProjectResponseMapper;
-import com.project.content.mapper.project.ProjectRequestMapper;
-import com.project.content.mapper.project.PostProjectResponseMapper;
+import com.project.content.mapper.project.PostProjectRequestMapper;
+import com.project.content.mapper.MetaResponseMapper;
+import com.project.content.mapper.project.UpdateProjectRequestMapper;
 import com.project.content.mapper.project.UpdateProjectResponseMapper;
-import com.project.content.model.project.ProjectResponse;
+import com.project.content.model.MetaResponse;
 import com.project.content.mapper.project.ProjectListMapper;
 import com.project.content.model.project.ProjectRequest;
 import com.project.content.model.project.UpdateProjectResponse;
@@ -15,31 +15,34 @@ import org.hibernate.service.spi.ServiceException;
 import org.springframework.stereotype.Service;
 import com.project.content.repository.ProjectsRepository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import static com.project.content.constants.ProjectConstants.DELETE_PROJECT_SUCCESS_MESSAGE;
 import static com.project.content.constants.ProjectConstants.EXISTING_PROJECT_ERROR_MESSAGE;
 import static com.project.content.constants.ProjectConstants.MISSING_PROJECT_ERROR_MESSAGE;
+import static com.project.content.constants.ProjectConstants.POST_PROJECT_SUCCESS_MESSAGE;
 
 @Service
 public class ProjectService {
 
     private final ProjectsRepository projectsRepository;
     private final ProjectListMapper projectListMapper;
-    private final PostProjectResponseMapper postProjectResponseMapper;
-    private final ProjectRequestMapper projectRequestMapper;
+    private final MetaResponseMapper metaResponseMapper;
+    private final PostProjectRequestMapper postProjectRequestMapper;
+    private final UpdateProjectRequestMapper updateProjectRequestMapper;
     private final UpdateProjectResponseMapper updateProjectResponseMapper;
-    private final DeleteProjectResponseMapper deleteProjectResponseMapper;
 
-    public ProjectService(ProjectsRepository projectsRepository, ProjectListMapper projectListMapper, PostProjectResponseMapper postProjectResponseMapper, ProjectRequestMapper projectRequestMapper,
-                          UpdateProjectResponseMapper updateProjectResponseMapper, DeleteProjectResponseMapper deleteProjectResponseMapper) {
+    public ProjectService(ProjectsRepository projectsRepository, ProjectListMapper projectListMapper, MetaResponseMapper metaResponseMapper, PostProjectRequestMapper postProjectRequestMapper,
+                          UpdateProjectResponseMapper updateProjectResponseMapper, UpdateProjectRequestMapper updateProjectRequestMapper) {
         this.projectsRepository = projectsRepository;
         this.projectListMapper = projectListMapper;
-        this.postProjectResponseMapper = postProjectResponseMapper;
-        this.projectRequestMapper = projectRequestMapper;
+        this.metaResponseMapper = metaResponseMapper;
+        this.postProjectRequestMapper = postProjectRequestMapper;
+        this.updateProjectRequestMapper = updateProjectRequestMapper;
         this.updateProjectResponseMapper = updateProjectResponseMapper;
-        this.deleteProjectResponseMapper = deleteProjectResponseMapper;
     }
 
     /** find projects */
@@ -73,33 +76,57 @@ public class ProjectService {
         return !projectsByTags.isEmpty() ? projectListMapper.mapTagsResponse(projectsByTags) : new ProjectListResponse();
     }
 
-    public ProjectResponse addProject(ProjectRequest projectRequest) {
+    public MetaResponse addProject(ProjectRequest projectRequest) {
         Optional<ProjectEntity> projectEntity = projectsRepository.findById(projectRequest.getProjectId());
         if(!projectEntity.isPresent()) {
-            projectsRepository.save(projectRequestMapper.map(projectRequest));
+            projectsRepository.save(postProjectRequestMapper.map(projectRequest));
         } else {
             throw new ServiceException(EXISTING_PROJECT_ERROR_MESSAGE);
         }
-        return postProjectResponseMapper.map();
+        return metaResponseMapper.map(POST_PROJECT_SUCCESS_MESSAGE);
     }
 
-    public UpdateProjectResponse updateProjectDetails(ProjectRequest projectRequest, Long projectId) {
-        Optional<ProjectEntity> projectEntity = projectsRepository.findById(projectId);
+    public UpdateProjectResponse updateProjectDetails(ProjectRequest projectRequest) {
+        Optional<ProjectEntity> projectEntity = projectsRepository.findById(projectRequest.getProjectId());
         if(projectEntity.isPresent()) {
-            projectsRepository.save(projectRequestMapper.map(projectRequest));
+            projectsRepository.save(updateProjectRequestMapper.map(projectRequest, projectEntity.get()));
         } else {
             throw new ServiceException(MISSING_PROJECT_ERROR_MESSAGE);
         }
-        return updateProjectResponseMapper.map(projectRequest);
+        return updateProjectResponseMapper.map(projectRequest, projectEntity.get());
     }
 
-    public ProjectResponse deleteProject(Long projectId) {
+    public MetaResponse deleteProject(Long projectId) {
         Optional<ProjectEntity> projectEntity = projectsRepository.findById(projectId);
         if(projectEntity.isPresent()) {
             projectsRepository.deleteById(projectId);
         } else {
             throw new ServiceException(MISSING_PROJECT_ERROR_MESSAGE);
         }
-        return deleteProjectResponseMapper.map();
+        return metaResponseMapper.map(DELETE_PROJECT_SUCCESS_MESSAGE);
+    }
+
+    /** update project status */
+    public UpdateProjectResponse updateProjectStatus(ProjectRequest projectRequest) {
+        UpdateProjectResponse updateProjectResponse = new UpdateProjectResponse();
+        Optional<ProjectEntity> projectEntity = projectsRepository.findById(projectRequest.getProjectId());
+        if(projectEntity.isPresent()) {
+            projectsRepository.save(updateProjectRequestMapper.mapStatus(projectRequest.getStatus(), projectEntity.get()));
+        } else {
+            throw new ServiceException(MISSING_PROJECT_ERROR_MESSAGE);
+        }
+        return updateProjectResponse;
+    }
+
+    /** update project end date */
+    public UpdateProjectResponse updateProjectEndDate(String endDate, Long projectId) {
+        UpdateProjectResponse updateProjectResponse = new UpdateProjectResponse();
+        Optional<ProjectEntity> projectEntity = projectsRepository.findById(projectId);
+        if(projectEntity.isPresent()) {
+            projectsRepository.save(updateProjectRequestMapper.mapEndDate(LocalDate.parse(endDate), projectEntity.get()));
+        } else {
+            throw new ServiceException(MISSING_PROJECT_ERROR_MESSAGE);
+        }
+        return updateProjectResponse;
     }
 }

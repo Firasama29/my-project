@@ -15,8 +15,6 @@ public class ProjectRequest {
 
     private String updatedDate;
 
-    private String type;
-
     private String status;
 
     private String tags;
@@ -55,20 +53,12 @@ public class ProjectRequest {
         this.startDate = startDate;
     }
 
-    public String getUpdateDate() {
+    public String getUpdatedDate() {
         return updatedDate;
     }
 
-    public void setUpdateDate(String updatedDate) {
+    public void setUpdatedDate(String updatedDate) {
         this.updatedDate = updatedDate;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
     public String getStatus() {
