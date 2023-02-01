@@ -1,5 +1,6 @@
 package com.project.content.mapper.project;
 
+import com.project.content.entity.ProjectStatusEntity;
 import com.project.content.model.project.ProjectData;
 import com.project.content.entity.ProjectEntity;
 import com.project.content.model.project.ProjectListResponse;
@@ -34,7 +35,7 @@ public class ProjectListMapper {
         projectData.setProjectId(projectEntity.getId());
         projectData.setProject(projectEntity.getName());
         projectData.setDescription(projectEntity.getDescription());
-        projectData.setStatus(projectEntity.getStatus());
+        projectData.setStatus(projectEntity.getStatus().getName());
         projectData.setStartDate(projectEntity.getStartDate());
         projectData.setUpdatedDate(projectEntity.getUpdatedDate());
         projectData.setTags(Objects.nonNull(projectEntity.getTags()) ? getTags(projectEntity.getTags()) : null);
@@ -49,7 +50,7 @@ public class ProjectListMapper {
         projectData.setDescription(projectEntity.getDescription());
         projectData.setStartDate(projectEntity.getStartDate());
         projectData.setUpdatedDate(projectEntity.getUpdatedDate());
-        projectData.setStatus(projectEntity.getStatus());
+        projectData.setStatus(projectEntity.getStatus().getName());
         projectData.setTags(Objects.nonNull(projectEntity.getTags()) ? getTags(projectEntity.getTags()) : null);
         return projectData;
     }
@@ -60,7 +61,7 @@ public class ProjectListMapper {
         projectData.setProjectId(projectEntity.getId());
         projectData.setProject(projectEntity.getName());
         projectData.setDescription(projectEntity.getDescription());
-        projectData.setStatus(projectEntity.getStatus());
+        projectData.setStatus(projectEntity.getStatus().getName());
         projectData.setStartDate(projectEntity.getStartDate());
         projectData.setUpdatedDate(projectEntity.getUpdatedDate());
         projectData.setTags(Objects.nonNull(projectEntity.getTags()) ? getTags(projectEntity.getTags()) : null);
@@ -75,7 +76,7 @@ public class ProjectListMapper {
     }
 //
     private List<ProjectData> mapDataByTags(List<ProjectEntity> projectEntities) {
-        return projectEntities.stream().map(this::mapProjectsByTags).collect(Collectors.toList());
+        return projectEntities.stream().map(projectEntity -> this.mapProjectsByTags(projectEntity)).collect(Collectors.toList());
     }
 
     private ProjectData mapProjectsByTags(ProjectEntity projectEntity) {
@@ -83,7 +84,7 @@ public class ProjectListMapper {
         projectData.setProjectId(projectEntity.getId());
         projectData.setProject(projectEntity.getName());
         projectData.setDescription(projectEntity.getDescription());
-        projectData.setStatus(projectEntity.getStatus());
+        projectData.setStatus(projectEntity.getStatus().getName());
         projectData.setStartDate(projectEntity.getStartDate());
         projectData.setUpdatedDate(projectEntity.getUpdatedDate());
         projectData.setTags(Objects.nonNull(projectEntity.getTags()) ? getTags(projectEntity.getTags()) : null);

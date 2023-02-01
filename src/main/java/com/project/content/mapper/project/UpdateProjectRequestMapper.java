@@ -1,31 +1,34 @@
 package com.project.content.mapper.project;
 
 import com.project.content.entity.ProjectEntity;
+import com.project.content.entity.ProjectStatusEntity;
 import com.project.content.model.project.ProjectRequest;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
+import java.util.Objects;
 
 @Component
 public class UpdateProjectRequestMapper {
 
-    public ProjectEntity map(ProjectRequest projectRequest, ProjectEntity existingProjectEntity) {
+    public ProjectEntity mapUpdate(ProjectRequest projectRequest, ProjectEntity existingProjectEntity) {
         ProjectEntity projectEntity = new ProjectEntity();
         projectEntity.setId(existingProjectEntity.getId());
-        projectEntity.setName(projectRequest.getProjectName());
-        projectEntity.setDescription(projectRequest.getDescription());
+        projectEntity.setName(StringUtils.isNotBlank(projectRequest.getProjectName()) ? projectRequest.getProjectName() : existingProjectEntity.getName());
+        projectEntity.setDescription(StringUtils.isNotBlank(projectRequest.getDescription()) ? projectRequest.getDescription() : existingProjectEntity.getDescription());
         projectEntity.setStatus(existingProjectEntity.getStatus());
         projectEntity.setStartDate(existingProjectEntity.getStartDate());
         projectEntity.setUpdatedDate(LocalDate.now());
         projectEntity.setEndDate(existingProjectEntity.getEndDate());
-        projectEntity.setTags(projectRequest.getTags());
+        projectEntity.setTags(StringUtils.isNotBlank(projectRequest.getTags()) ? projectRequest.getTags() : existingProjectEntity.getTags());
         return projectEntity;
     }
 
-    public ProjectEntity mapStatus(String status, ProjectEntity existingProjectEntity) {
+    public ProjectEntity mapStatus(ProjectEntity existingProjectEntity, ProjectStatusEntity projectStatusEntity) {
         ProjectEntity projectEntity = new ProjectEntity();
         projectEntity.setId(existingProjectEntity.getId());
-        projectEntity.setStatus(status);
+        projectEntity.setStatus(projectStatusEntity);
         return projectEntity;
     }
 

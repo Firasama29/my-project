@@ -2,6 +2,8 @@ package com.project.content.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -17,6 +19,10 @@ public class ProjectEntity implements Serializable {
 
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "status_id")
+    private ProjectStatusEntity status;
+
     private String tags;
 
     private LocalDate startDate;
@@ -25,11 +31,9 @@ public class ProjectEntity implements Serializable {
 
     private LocalDate endDate;
 
-    private String status;
-
     public ProjectEntity(){}
 
-    public ProjectEntity(Long id, String name, String description, String tags, LocalDate startDate, LocalDate updatedDate, LocalDate endDate, String status) {
+    public ProjectEntity(Long id, String name, String description, String tags, LocalDate startDate, LocalDate updatedDate, LocalDate endDate, ProjectStatusEntity status) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -92,11 +96,11 @@ public class ProjectEntity implements Serializable {
         this.endDate = endDate;
     }
 
-    public String getStatus() {
+    public ProjectStatusEntity getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(ProjectStatusEntity status) {
         this.status = status;
     }
 
@@ -106,11 +110,11 @@ public class ProjectEntity implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", status='" + status + '\'' +
                 ", tags=" + tags +
                 ", startDate=" + startDate +
                 ", startDate=" + updatedDate +
                 ", endDate=" + endDate +
-                ", status='" + status + '\'' +
                 '}';
     }
 }

@@ -36,5 +36,6 @@ This project consists of microservices
 - repositories
 - services
 - rest controller
-- exception handling  -  pending
-- @Query              -  pending
+- exception handling                         -  pending
+- @Query                                     -  pending
+- @Embeddable and composite key              -  pending
