@@ -1,6 +1,7 @@
 package com.project.content.service;
 
 import com.project.content.entity.TopicsEntity;
+import com.project.content.exception.ResourceNotFoundException;
 import com.project.content.mapper.MetaResponseMapper;
 import com.project.content.mapper.topic.TopicRequestMapper;
 import com.project.content.mapper.topic.TopicsResponseMapper;
@@ -56,8 +57,8 @@ public class TopicsService {
     /** get a topic by name */
     public TopicsData getTopicByName(String topicName) {
         Optional<TopicsEntity> topicsEntity = topicsRepository.findByName(topicName);
-        if(!topicsEntity.isPresent()) {
-            throw new ServiceException(MISSING_TOPIC_ERROR_MESSAGE);
+        if(topicsEntity.isEmpty()) {
+            throw new ResourceNotFoundException(MISSING_TOPIC_ERROR_MESSAGE);
         }
         return topicsResponseMapper.mapByName(topicsEntity.get());
     }
@@ -92,7 +93,7 @@ public class TopicsService {
     /** delete a topic */
     public MetaResponse deleteTopic(Long topicId) {
         Optional<TopicsEntity> topicsEntity = topicsRepository.findById(topicId);
-        if(!topicsEntity.isPresent()) {
+        if(topicsEntity.isEmpty()) {
             throw new ServiceException(MISSING_TOPIC_ERROR_MESSAGE);
         }
         topicsRepository.deleteById(topicId);

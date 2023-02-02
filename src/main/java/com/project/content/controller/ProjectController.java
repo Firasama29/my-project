@@ -7,6 +7,7 @@ import com.project.content.model.project.ProjectData;
 import com.project.content.model.project.ProjectListResponse;
 import com.project.content.service.ProjectService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,8 +18,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("/api/project")
+@Validated
 public class ProjectController {
 
     private ProjectService projectService;
@@ -60,7 +64,7 @@ public class ProjectController {
 
     /** add new projects */
     @PostMapping
-    public ResponseEntity<MetaResponse> postProject(@RequestBody ProjectRequest projectRequest) {
+    public ResponseEntity<MetaResponse> postProject(@Validated @RequestBody ProjectRequest projectRequest) {
         return ResponseEntity.ok(projectService.addProject(projectRequest));
     }
 
@@ -74,12 +78,6 @@ public class ProjectController {
     @PutMapping(path = "/status")
     public ResponseEntity<UpdateProjectResponse> putProjectStatus(@RequestBody ProjectRequest projectRequest) {
         return ResponseEntity.ok(projectService.updateProjectStatus(projectRequest));
-    }
-
-    /** update project's end date */
-    @PutMapping(path = "/endDate")
-    public ResponseEntity<UpdateProjectResponse> putProjectEndDate(@RequestParam(name = "endDate") String endDate, @RequestParam(name = "id") Long projectId) {
-        return ResponseEntity.ok(projectService.updateProjectEndDate(endDate, projectId));
     }
 
     /** delete a project by id */

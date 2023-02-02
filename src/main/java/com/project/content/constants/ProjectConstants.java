@@ -1,9 +1,13 @@
 package com.project.content.constants;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class ProjectConstants {
 
     public static final String POST_PROJECT_SUCCESS_MESSAGE = "Project has been saved successfully!";
     public static final String UPDATE_PROJECT_SUCCESS_MESSAGE = "Project details have been updated successfully!";
+    public static final String UPDATE_PROJECT_STATUS_SUCCESS_MESSAGE = "Project details have been updated successfully!";
     public static final String DELETE_PROJECT_SUCCESS_MESSAGE = "Project has been deleted successfully!";
 
     public static final String POST_TOPIC_SUCCESS_MESSAGE = "Topic has been saved successfully!";
@@ -21,4 +25,6 @@ public class ProjectConstants {
 
     public static final String PROJECT_PENDING_STATUS = "pending";
     public static final String PROJECT_IN_PROGRESS_STATUS = "in-progress";
+
+    public static final List<String> COMPLETED_PROJECT_STATUSES = Arrays.asList("completed", "cancelled");
 }

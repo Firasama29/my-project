@@ -2,11 +2,14 @@ package com.project.content.model.project;
 
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotNull;
+
 @Component
 public class ProjectRequest {
 
     private Long projectId;
 
+    @NotNull(message = "project name is required")
     private String projectName;
 
     private String description;

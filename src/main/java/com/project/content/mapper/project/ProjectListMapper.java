@@ -1,6 +1,5 @@
 package com.project.content.mapper.project;
 
-import com.project.content.entity.ProjectStatusEntity;
 import com.project.content.model.project.ProjectData;
 import com.project.content.entity.ProjectEntity;
 import com.project.content.model.project.ProjectListResponse;
@@ -74,9 +73,9 @@ public class ProjectListMapper {
         projectResponse.setProjectData(this.mapDataByTags(projectEntities));
         return projectResponse;
     }
-//
+
     private List<ProjectData> mapDataByTags(List<ProjectEntity> projectEntities) {
-        return projectEntities.stream().map(projectEntity -> this.mapProjectsByTags(projectEntity)).collect(Collectors.toList());
+        return projectEntities.stream().map(this::mapProjectsByTags).collect(Collectors.toList());
     }
 
     private ProjectData mapProjectsByTags(ProjectEntity projectEntity) {
