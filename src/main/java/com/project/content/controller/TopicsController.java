@@ -30,7 +30,7 @@ public class TopicsController {
     /** get list of topics */
     @GetMapping
     public ResponseEntity<TopicsResponse> getTopicsList() {
-        return ResponseEntity.ok(topicsService.getTags());
+        return ResponseEntity.ok(topicsService.getTopics());
     }
 
     /** get a topic by id */

@@ -9,6 +9,8 @@ import java.util.Optional;
 
 public interface ProjectsRepository extends JpaRepository<ProjectEntity, Long> {
 
+    List<ProjectEntity> findByOrderByName();
+
     public Optional<ProjectEntity> findByName(String name);
 
     @Query(name = "SELECT p FROM project p INNER JOIN project_status ps ON p.status_id = ps.id WHERE ps.name = :status", nativeQuery = true)

@@ -1,7 +1,7 @@
 package com.project.content.service;
 
+import com.project.content.cache.TopicsCache;
 import com.project.content.entity.TopicsEntity;
-import com.project.content.exception.ResourceNotFoundException;
 import com.project.content.mapper.MetaResponseMapper;
 import com.project.content.mapper.topic.TopicRequestMapper;
 import com.project.content.mapper.topic.TopicsResponseMapper;
@@ -20,20 +20,23 @@ import java.util.Optional;
 
 import static com.project.content.constants.ProjectConstants.DELETE_TOPIC_SUCCESS_MESSAGE;
 import static com.project.content.constants.ProjectConstants.EXISTING_TOPIC_ERROR_MESSAGE;
-import static com.project.content.constants.ProjectConstants.MISSING_TOPIC_ERROR_MESSAGE;
+import static com.project.content.constants.ProjectConstants.MISSING_TOPIC_ERROR;
 import static com.project.content.constants.ProjectConstants.POST_TOPIC_SUCCESS_MESSAGE;
 
 @Service
 public class TopicsService {
 
     private final TopicsRepository topicsRepository;
+    private final TopicsCache topicsCache;
     private final TopicsResponseMapper topicsResponseMapper;
     private final TopicRequestMapper topicRequestMapper;
     private final MetaResponseMapper metaResponseMapper;
     private final UpdateTopicResponseMapper updateTopicResponseMapper;
 
-    public TopicsService(TopicsRepository topicsRepository, TopicsResponseMapper topicsResponseMapper, TopicRequestMapper topicRequestMapper, MetaResponseMapper metaResponseMapper, UpdateTopicResponseMapper updateTopicResponseMapper) {
+    public TopicsService(TopicsRepository topicsRepository,TopicsCache topicsCache, TopicsResponseMapper topicsResponseMapper, TopicRequestMapper topicRequestMapper, MetaResponseMapper metaResponseMapper,
+                         UpdateTopicResponseMapper updateTopicResponseMapper) {
         this.topicsRepository = topicsRepository;
+        this.topicsCache = topicsCache;
         this.topicsResponseMapper = topicsResponseMapper;
         this.topicRequestMapper = topicRequestMapper;
         this.metaResponseMapper = metaResponseMapper;
@@ -41,31 +44,25 @@ public class TopicsService {
     }
 
     /** list all topics */
-    public TopicsResponse getTags() {
-        return topicsResponseMapper.map(topicsRepository.findAll());
+    public TopicsResponse getTopics() {
+        return topicsResponseMapper.map(topicsCache.getAllTopics());
     }
 
     /** get a topic by id */
     public TopicsData getTopicById(Long topicId) {
-        Optional<TopicsEntity> topicsEntity = topicsRepository.findById(topicId);
-        if(!topicsEntity.isPresent()) {
-            throw new ServiceException(MISSING_TOPIC_ERROR_MESSAGE);
-        }
-        return topicsResponseMapper.mapDataById(topicsEntity.get());
+        TopicsEntity topicsEntity = topicsCache.filterTopicsById(topicId);
+        return topicsResponseMapper.mapDataById(topicsEntity);
     }
 
     /** get a topic by name */
     public TopicsData getTopicByName(String topicName) {
-        Optional<TopicsEntity> topicsEntity = topicsRepository.findByName(topicName);
-        if(topicsEntity.isEmpty()) {
-            throw new ResourceNotFoundException(MISSING_TOPIC_ERROR_MESSAGE);
-        }
-        return topicsResponseMapper.mapByName(topicsEntity.get());
+        TopicsEntity topicsEntity = topicsCache.filterTopicByName(topicName);
+        return topicsResponseMapper.mapByName(topicsEntity);
     }
 
     /** get topics by tags */
     public TopicsResponse getTopicsByTags(String tags) {
-        List<TopicsEntity> topicsEntities = topicsRepository.findByTags(tags);
+        List<TopicsEntity> topicsEntities = topicsCache.filterByTags(tags);
         return topicsResponseMapper.mapByTags(topicsEntities);
     }
 
@@ -85,7 +82,7 @@ public class TopicsService {
         if(topicsEntity.isPresent()) {
             topicsRepository.save(topicRequestMapper.map(topicRequest));
         } else {
-            throw new ServiceException(MISSING_TOPIC_ERROR_MESSAGE);
+            throw new ServiceException(MISSING_TOPIC_ERROR);
         }
         return updateTopicResponseMapper.map(topicsEntity.get());
     }
@@ -93,8 +90,8 @@ public class TopicsService {
     /** delete a topic */
     public MetaResponse deleteTopic(Long topicId) {
         Optional<TopicsEntity> topicsEntity = topicsRepository.findById(topicId);
-        if(topicsEntity.isEmpty()) {
-            throw new ServiceException(MISSING_TOPIC_ERROR_MESSAGE);
+        if(!topicsEntity.isPresent()) {
+            throw new ServiceException(MISSING_TOPIC_ERROR);
         }
         topicsRepository.deleteById(topicId);
         return metaResponseMapper.map(DELETE_TOPIC_SUCCESS_MESSAGE);

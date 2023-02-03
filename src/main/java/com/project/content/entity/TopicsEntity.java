@@ -1,10 +1,7 @@
 package com.project.content.entity;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.io.Serializable;
 
@@ -13,8 +10,6 @@ import java.io.Serializable;
 public class TopicsEntity implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "SEQUENCE_TOPICS")
-    @SequenceGenerator(name = "SEQUENCE_TOPICS", sequenceName = "sequence_topics")
     private Long id;
 
     private String name;

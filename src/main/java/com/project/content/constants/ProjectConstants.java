@@ -16,11 +16,11 @@ public class ProjectConstants {
 
     public static final String COMMA = ", ";
 
-    public static final String MISSING_PROJECT_ERROR_MESSAGE = "Requested project does not exists";
+    public static final String MISSING_PROJECT_ERROR = "Requested project does not exists";
     public static final String EXISTING_PROJECT_ERROR_MESSAGE = "Requested project already exists";
     public static final String INVALID_STATUS = "Status does not exist!";
 
-    public static final String MISSING_TOPIC_ERROR_MESSAGE = "Requested topic does not exists";
+    public static final String MISSING_TOPIC_ERROR = "Requested topic does not exists";
     public static final String EXISTING_TOPIC_ERROR_MESSAGE = "Requested topic already exists";
 
     public static final String PROJECT_PENDING_STATUS = "pending";

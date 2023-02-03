@@ -6,7 +6,7 @@ This project consists of microservices
 # content-service
   a microservice to display, add and manipulate lists of websites, blogs, topics and articles.
   components
-- **entities**
+**entities**
   1. Blogs                                                      ----> done
      - id | Long | consider UUID | required | pk
      - url | String | required
@@ -33,9 +33,12 @@ This project consists of microservices
      - url | String | required
      - title | String | required
      - description | String
-- repositories
-- services
-- rest controller
+**repositories**                             -  done
+**services**                                 -  done
+**rest controller**                          -  done
+
 - exception handling                         -  pending
 - @Query                                     -  pending
 - @Embeddable and composite key              -  pending
+- caching(topics, blogs)                     -  in-progress
+- lombok                                     -  pending

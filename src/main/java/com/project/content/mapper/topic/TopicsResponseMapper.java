@@ -63,7 +63,7 @@ public class TopicsResponseMapper {
         TopicsData topicsData = new TopicsData();
         topicsData.setId(topicsEntity.getId());
         topicsData.setTopic(topicsEntity.getName());
-        topicsData.setTags(Collections.emptyList());
+        topicsData.setTags(getTags(topicsEntity.getTags()));
         return topicsData;
     }
 }
