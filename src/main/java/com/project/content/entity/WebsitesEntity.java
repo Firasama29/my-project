@@ -14,9 +14,9 @@ public class WebsitesEntity implements Serializable {
     @Id
     private Long id;
 
-    private String url;
-
     private String title;
+
+    private String url;
 
     private String description;
 

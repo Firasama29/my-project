@@ -37,8 +37,9 @@ This project consists of microservices
 **services**                                 -  done
 **rest controller**                          -  done
 
-- exception handling                         -  pending
+- exception handling                         -  in-progress
 - @Query                                     -  pending
 - @Embeddable and composite key              -  pending
 - caching(topics, blogs)                     -  in-progress
 - lombok                                     -  pending
+- Unit tests                                 -  pending
