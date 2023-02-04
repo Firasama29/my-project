@@ -2,10 +2,8 @@ package com.project.content.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Table(name = "blogs")
@@ -13,6 +11,8 @@ public class BlogsEntity implements Serializable {
 
     @Id
     private Long id;
+
+    private String title;
 
     private String url;
 
@@ -24,10 +24,12 @@ public class BlogsEntity implements Serializable {
 
     public BlogsEntity() {}
 
-    public BlogsEntity(Long id, String url, String description, String author, String tags) {
+    public BlogsEntity(Long id, String title, String url, String description, String author, String tags) {
         this.id = id;
+        this.title = title;
         this.url = url;
         this.description = description;
+        this.author = author;
         this.tags = tags;
     }
 
@@ -37,6 +39,14 @@ public class BlogsEntity implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getUrl() {
@@ -75,6 +85,7 @@ public class BlogsEntity implements Serializable {
     public String toString() {
         return "Blogs{" +
                 "id=" + id +
+                ", title='" + title + '\'' +
                 ", url='" + url + '\'' +
                 ", description='" + description + '\'' +
                 ", author='" + author + '\'' +

@@ -6,7 +6,7 @@ import com.project.content.mapper.MetaResponseMapper;
 import com.project.content.mapper.topic.TopicRequestMapper;
 import com.project.content.mapper.topic.TopicsResponseMapper;
 import com.project.content.mapper.topic.UpdateTopicResponseMapper;
-import com.project.content.model.TopicRequest;
+import com.project.content.model.topics.TopicRequest;
 import com.project.content.model.MetaResponse;
 import com.project.content.model.topics.TopicsData;
 import com.project.content.model.topics.TopicsResponse;
@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.project.content.constants.ProjectConstants.DELETE_TOPIC_SUCCESS_MESSAGE;
-import static com.project.content.constants.ProjectConstants.EXISTING_TOPIC_ERROR_MESSAGE;
+import static com.project.content.constants.ProjectConstants.EXISTING_TOPIC_ERROR;
 import static com.project.content.constants.ProjectConstants.MISSING_TOPIC_ERROR;
 import static com.project.content.constants.ProjectConstants.POST_TOPIC_SUCCESS_MESSAGE;
 
@@ -76,7 +76,7 @@ public class TopicsServiceImpl implements TopicsService {
     public MetaResponse addNewTopic(TopicRequest topicRequest) {
         Optional<TopicsEntity> topicsEntity = topicsRepository.findById(topicRequest.getId());
         if(topicsEntity.isPresent()) {
-            throw new ServiceException(EXISTING_TOPIC_ERROR_MESSAGE);
+            throw new ServiceException(EXISTING_TOPIC_ERROR);
         }
         topicsRepository.save(topicRequestMapper.map(topicRequest));
         return metaResponseMapper.map(POST_TOPIC_SUCCESS_MESSAGE);

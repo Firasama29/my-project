@@ -1,7 +1,7 @@
 package com.project.content.mapper.topic;
 
 import com.project.content.entity.TopicsEntity;
-import com.project.content.model.TopicRequest;
+import com.project.content.model.topics.TopicRequest;
 import org.springframework.stereotype.Component;
 
 @Component

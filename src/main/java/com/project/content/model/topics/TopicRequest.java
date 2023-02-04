@@ -1,4 +1,4 @@
-package com.project.content.model;
+package com.project.content.model.topics;
 
 import java.util.List;
 

@@ -31,7 +31,7 @@ import java.util.Optional;
 
 import static com.project.content.constants.ProjectConstants.COMPLETED_PROJECT_STATUSES;
 import static com.project.content.constants.ProjectConstants.DELETE_PROJECT_SUCCESS_MESSAGE;
-import static com.project.content.constants.ProjectConstants.EXISTING_PROJECT_ERROR_MESSAGE;
+import static com.project.content.constants.ProjectConstants.EXISTING_PROJECT_ERROR;
 import static com.project.content.constants.ProjectConstants.INVALID_STATUS;
 import static com.project.content.constants.ProjectConstants.MISSING_PROJECT_ERROR;
 import static com.project.content.constants.ProjectConstants.POST_PROJECT_SUCCESS_MESSAGE;
@@ -107,7 +107,7 @@ public class ProjectServiceImpl implements ProjectService {
         if(!projectEntity.isPresent()) {
             projectsRepository.save(postProjectRequestMapper.map(projectRequest, projectStatusEntity));
         } else {
-            throw new ResourceAlreadyExistsException(EXISTING_PROJECT_ERROR_MESSAGE);
+            throw new ResourceAlreadyExistsException(EXISTING_PROJECT_ERROR);
         }
         return metaResponseMapper.map(POST_PROJECT_SUCCESS_MESSAGE);
     }
