@@ -7,6 +7,8 @@ import com.project.content.exception.ResourceNotFoundException;
 import com.project.content.mapper.MetaResponseMapper;
 import com.project.content.mapper.blogs.BlogsDataMapper;
 import com.project.content.mapper.blogs.BlogsResponseMapper;
+import com.project.content.mapper.blogs.UpdateBlogsRequestMapper;
+import com.project.content.mapper.blogs.UpdateBlogsResponseMapper;
 import com.project.content.model.MetaResponse;
 import com.project.content.model.blogs.BlogsData;
 import com.project.content.model.blogs.BlogsRequest;
@@ -33,15 +35,20 @@ public class BlogsServiceImpl implements BlogsService {
     private final BlogsDataMapper blogsDataMapper;
     private final MetaResponseMapper metaResponseMapper;
     private final BlogsRequestMapper blogsRequestMapper;
+    private final UpdateBlogsRequestMapper updateBlogsRequestMapper;
+    private final UpdateBlogsResponseMapper updateBlogsResponseMapper;
 
     public BlogsServiceImpl(BlogRepository blogRepository, BlogsCache blogsCache, BlogsResponseMapper blogsResponseMapper, BlogsDataMapper blogsDataMapper,
-                            BlogsRequestMapper blogsRequestMapper, MetaResponseMapper metaResponseMapper) {
+                            BlogsRequestMapper blogsRequestMapper, MetaResponseMapper metaResponseMapper, UpdateBlogsRequestMapper updateBlogsRequestMapper,
+                            UpdateBlogsResponseMapper updateBlogsResponseMapper) {
         this.blogRepository = blogRepository;
         this.blogsCache = blogsCache;
         this.blogsResponseMapper = blogsResponseMapper;
         this.blogsDataMapper = blogsDataMapper;
         this.blogsRequestMapper = blogsRequestMapper;
         this.metaResponseMapper = metaResponseMapper;
+        this.updateBlogsRequestMapper = updateBlogsRequestMapper;
+        this.updateBlogsResponseMapper = updateBlogsResponseMapper;
     }
 
     @Override
@@ -94,13 +101,13 @@ public class BlogsServiceImpl implements BlogsService {
     @Override
     public BlogsData updateBlogDetails(BlogsRequest blogsRequest) {
         BlogsEntity blogsEntity = blogRepository.findById(blogsRequest.getId()).orElseThrow(() -> new ResourceNotFoundException(MISSING_BLOG_ERROR));
-        blogRepository.save(blogsRequestMapper.mapRequest(blogsRequest));
-        return blogsDataMapper.mapBlogs(blogsEntity);
+        blogRepository.save(updateBlogsRequestMapper.mapRequest(blogsRequest, blogsEntity));
+        return updateBlogsResponseMapper.mapResponse(blogsEntity);
     }
 
     @Override
     public MetaResponse deleteBlogsById(Long id) {
-        BlogsEntity blogsEntity = blogsCache.filterBlogsById(id);
+        BlogsEntity blogsEntity = blogRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(MISSING_BLOG_ERROR));
         blogRepository.delete(blogsEntity);
         return metaResponseMapper.map(DELETE_TOPIC_SUCCESS_MESSAGE);
     }

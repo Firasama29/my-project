@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-import static com.project.content.constants.ProjectConstants.DELETE_TOPIC_SUCCESS_MESSAGE;
+import static com.project.content.constants.ProjectConstants.DELETE_WEBSITE_SUCCESS_MESSAGE;
 import static com.project.content.constants.ProjectConstants.EXISTING_WEBSITE_ERROR;
 import static com.project.content.constants.ProjectConstants.MISSING_WEBSITE_ERROR;
 import static com.project.content.constants.ProjectConstants.POST_WEBSITE_SUCCESS_MESSAGE;
@@ -100,6 +100,6 @@ public class WebsitesServiceImpl implements WebsiteService {
     public MetaResponse deleteWebsites(Long id) {
         WebsitesEntity websitesEntity = websitesRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(MISSING_WEBSITE_ERROR));
         websitesRepository.delete(websitesEntity);
-        return metaResponseMapper.map(DELETE_TOPIC_SUCCESS_MESSAGE);
+        return metaResponseMapper.map(DELETE_WEBSITE_SUCCESS_MESSAGE);
     }
 }

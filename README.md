@@ -43,3 +43,5 @@ This project consists of microservices
 - caching(topics, blogs)                     -  in-progress
 - lombok                                     -  pending
 - Unit tests                                 -  pending
+- Design patterns                            -  pending
+  - builder pattern                          -  pending

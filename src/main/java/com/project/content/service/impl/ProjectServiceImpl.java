@@ -142,12 +142,8 @@ public class ProjectServiceImpl implements ProjectService {
     /** delete a project */
     @Override
     public MetaResponse deleteProject(Long projectId) {
-        Optional<ProjectEntity> projectEntity = projectsRepository.findById(projectId);
-        if(projectEntity.isPresent()) {
-            projectsRepository.deleteById(projectId);
-        } else {
-            throw new ResourceNotFoundException(MISSING_PROJECT_ERROR);
-        }
+        ProjectEntity projectEntity = projectsRepository.findById(projectId).orElseThrow(() -> new ResourceNotFoundException(MISSING_PROJECT_ERROR));
+        projectsRepository.delete(projectEntity);
         return metaResponseMapper.map(DELETE_PROJECT_SUCCESS_MESSAGE);
     }
 }

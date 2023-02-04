@@ -20,8 +20,6 @@ public class ProjectData {
 
     public ProjectData() {}
 
-
-
     public Long getProjectId() {
         return projectId;
     }

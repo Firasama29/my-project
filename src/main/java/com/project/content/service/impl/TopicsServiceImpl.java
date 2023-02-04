@@ -2,9 +2,12 @@ package com.project.content.service.impl;
 
 import com.project.content.cache.TopicsCache;
 import com.project.content.entity.TopicsEntity;
+import com.project.content.exception.ResourceAlreadyExistsException;
+import com.project.content.exception.ResourceNotFoundException;
 import com.project.content.mapper.MetaResponseMapper;
 import com.project.content.mapper.topic.TopicRequestMapper;
 import com.project.content.mapper.topic.TopicsResponseMapper;
+import com.project.content.mapper.topic.UpdateTopicRequestMapper;
 import com.project.content.mapper.topic.UpdateTopicResponseMapper;
 import com.project.content.model.topics.TopicRequest;
 import com.project.content.model.MetaResponse;
@@ -13,7 +16,6 @@ import com.project.content.model.topics.TopicsResponse;
 import com.project.content.model.topics.UpdateTopicResponse;
 import com.project.content.repository.TopicsRepository;
 import com.project.content.service.TopicsService;
-import org.hibernate.service.spi.ServiceException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,15 +35,17 @@ public class TopicsServiceImpl implements TopicsService {
     private final TopicRequestMapper topicRequestMapper;
     private final MetaResponseMapper metaResponseMapper;
     private final UpdateTopicResponseMapper updateTopicResponseMapper;
+    private final UpdateTopicRequestMapper updateTopicRequestMapper;
 
     public TopicsServiceImpl(TopicsRepository topicsRepository, TopicsCache topicsCache, TopicsResponseMapper topicsResponseMapper, TopicRequestMapper topicRequestMapper, MetaResponseMapper metaResponseMapper,
-                             UpdateTopicResponseMapper updateTopicResponseMapper) {
+                             UpdateTopicResponseMapper updateTopicResponseMapper, UpdateTopicRequestMapper updateTopicRequestMapper) {
         this.topicsRepository = topicsRepository;
         this.topicsCache = topicsCache;
         this.topicsResponseMapper = topicsResponseMapper;
         this.topicRequestMapper = topicRequestMapper;
         this.metaResponseMapper = metaResponseMapper;
         this.updateTopicResponseMapper = updateTopicResponseMapper;
+        this.updateTopicRequestMapper = updateTopicRequestMapper;
     }
 
     /** list all topics */
@@ -76,7 +80,7 @@ public class TopicsServiceImpl implements TopicsService {
     public MetaResponse addNewTopic(TopicRequest topicRequest) {
         Optional<TopicsEntity> topicsEntity = topicsRepository.findById(topicRequest.getId());
         if(topicsEntity.isPresent()) {
-            throw new ServiceException(EXISTING_TOPIC_ERROR);
+            throw new ResourceAlreadyExistsException(EXISTING_TOPIC_ERROR);
         }
         topicsRepository.save(topicRequestMapper.map(topicRequest));
         return metaResponseMapper.map(POST_TOPIC_SUCCESS_MESSAGE);
@@ -85,23 +89,16 @@ public class TopicsServiceImpl implements TopicsService {
     /** update a topic */
     @Override
     public UpdateTopicResponse updateTopicDetails(TopicRequest topicRequest) {
-        Optional<TopicsEntity> topicsEntity = topicsRepository.findById(topicRequest.getId());
-        if(topicsEntity.isPresent()) {
-            topicsRepository.save(topicRequestMapper.map(topicRequest));
-        } else {
-            throw new ServiceException(MISSING_TOPIC_ERROR);
-        }
-        return updateTopicResponseMapper.map(topicsEntity.get());
+        TopicsEntity topicsEntity = topicsRepository.findById(topicRequest.getId()).orElseThrow(() -> new ResourceNotFoundException(MISSING_TOPIC_ERROR));
+        topicsRepository.save(updateTopicRequestMapper.mapRequest(topicRequest, topicsEntity));
+        return updateTopicResponseMapper.map(topicsEntity);
     }
 
     /** delete a topic */
     @Override
     public MetaResponse deleteTopic(Long topicId) {
-        Optional<TopicsEntity> topicsEntity = topicsRepository.findById(topicId);
-        if(!topicsEntity.isPresent()) {
-            throw new ServiceException(MISSING_TOPIC_ERROR);
-        }
-        topicsRepository.deleteById(topicId);
+        TopicsEntity topicsEntity = topicsRepository.findById(topicId).orElseThrow(() -> new ResourceNotFoundException(MISSING_TOPIC_ERROR));
+        topicsRepository.delete(topicsEntity);
         return metaResponseMapper.map(DELETE_TOPIC_SUCCESS_MESSAGE);
     }
 }

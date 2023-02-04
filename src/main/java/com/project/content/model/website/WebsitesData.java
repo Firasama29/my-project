@@ -14,6 +14,8 @@ public class WebsitesData {
 
     private List<String> tags;
 
+    public WebsitesData() {}
+
     public Long getId() {
         return id;
     }
