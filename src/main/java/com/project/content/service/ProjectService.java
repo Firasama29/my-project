@@ -1,143 +1,28 @@
 package com.project.content.service;
 
-import com.project.content.entity.ProjectEntity;
-import com.project.content.entity.ProjectStatusEntity;
-import com.project.content.exception.InvalidArgumentException;
-import com.project.content.exception.ResourceAlreadyExistsException;
-import com.project.content.exception.ResourceNotFoundException;
-import com.project.content.mapper.project.PostProjectRequestMapper;
-import com.project.content.mapper.MetaResponseMapper;
-import com.project.content.mapper.project.UpdateProjectRequestMapper;
-import com.project.content.mapper.project.UpdateProjectResponseMapper;
 import com.project.content.model.MetaResponse;
-import com.project.content.mapper.project.ProjectListMapper;
-import com.project.content.model.project.ProjectRequest;
-import com.project.content.model.project.UpdateProjectResponse;
 import com.project.content.model.project.ProjectData;
 import com.project.content.model.project.ProjectListResponse;
-import com.project.content.repository.ProjectStatusRepository;
-import org.hibernate.service.spi.ServiceException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.stereotype.Service;
-import com.project.content.repository.ProjectsRepository;
+import com.project.content.model.project.ProjectRequest;
+import com.project.content.model.project.UpdateProjectResponse;
 
-import java.time.LocalDate;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
+public interface ProjectService {
 
-import static com.project.content.constants.ProjectConstants.COMPLETED_PROJECT_STATUSES;
-import static com.project.content.constants.ProjectConstants.DELETE_PROJECT_SUCCESS_MESSAGE;
-import static com.project.content.constants.ProjectConstants.EXISTING_PROJECT_ERROR_MESSAGE;
-import static com.project.content.constants.ProjectConstants.INVALID_STATUS;
-import static com.project.content.constants.ProjectConstants.MISSING_PROJECT_ERROR;
-import static com.project.content.constants.ProjectConstants.POST_PROJECT_SUCCESS_MESSAGE;
-import static com.project.content.constants.ProjectConstants.PROJECT_IN_PROGRESS_STATUS;
-import static com.project.content.constants.ProjectConstants.PROJECT_PENDING_STATUS;
+    ProjectListResponse findProjects();
 
-@Service
-public class ProjectService {
+    ProjectData findProjectById(Long id);
 
-    private final ProjectsRepository projectsRepository;
-    private final ProjectStatusRepository projectStatusRepository;
-    private final ProjectListMapper projectListMapper;
-    private final MetaResponseMapper metaResponseMapper;
-    private final PostProjectRequestMapper postProjectRequestMapper;
-    private final UpdateProjectRequestMapper updateProjectRequestMapper;
-    private final UpdateProjectResponseMapper updateProjectResponseMapper;
+    ProjectData findProjectByName(String name);
 
-    public ProjectService(ProjectsRepository projectsRepository, ProjectStatusRepository projectStatusRepository, ProjectListMapper projectListMapper, MetaResponseMapper metaResponseMapper, PostProjectRequestMapper postProjectRequestMapper,
-                          UpdateProjectResponseMapper updateProjectResponseMapper, UpdateProjectRequestMapper updateProjectRequestMapper) {
-        this.projectsRepository = projectsRepository;
-        this.projectStatusRepository = projectStatusRepository;
-        this.projectListMapper = projectListMapper;
-        this.metaResponseMapper = metaResponseMapper;
-        this.postProjectRequestMapper = postProjectRequestMapper;
-        this.updateProjectRequestMapper = updateProjectRequestMapper;
-        this.updateProjectResponseMapper = updateProjectResponseMapper;
-    }
+    ProjectListResponse findProjectsByStatus(String status);
 
-    Logger log = LoggerFactory.getLogger(ProjectService.class);
+    ProjectListResponse findProjectsByTags(String tag);
 
-    /** find projects */
-    public ProjectListResponse findProjects() {
-        return projectListMapper.map(projectsRepository.findByOrderByName());
-    }
+    MetaResponse addProject(ProjectRequest projectRequest);
 
-    /** find a project by id  */
-    public ProjectData findProjectById(Long id) {
-        ProjectEntity projectEntity = projectsRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(MISSING_PROJECT_ERROR));
-        return projectListMapper.mapDataById(projectEntity);
-    }
+    UpdateProjectResponse updateProjectDetails(ProjectRequest projectRequest);
 
-    /** find a project by name  */
-    public ProjectData findProjectByName(String name) {
-        ProjectEntity projectEntityByName = projectsRepository.findByName(name).orElseThrow(() -> new ResourceNotFoundException(MISSING_PROJECT_ERROR));
-        return projectListMapper.mapDataByName(projectEntityByName);
-    }
+    UpdateProjectResponse updateProjectStatus(ProjectRequest projectRequest);
 
-    /** find by status  */
-    public ProjectListResponse findProjectsByStatus(String status) {
-        List<ProjectEntity> projectEntitiesByStatus = projectsRepository.findByStatusName(status);
-        return Objects.nonNull(projectEntitiesByStatus) ? projectListMapper.map(projectEntitiesByStatus) : new ProjectListResponse();
-    }
-
-    /** find by tags  */
-    public ProjectListResponse findProjectsByTags(String tag) {
-        List<ProjectEntity> projectsByTags = projectsRepository.findByTags(tag);
-        if(projectsByTags.isEmpty()) {
-            throw new ResourceNotFoundException(MISSING_PROJECT_ERROR);
-        }
-        return projectListMapper.mapTagsResponse(projectsByTags);
-    }
-
-    /** add a new project  */
-    public MetaResponse addProject(ProjectRequest projectRequest) {
-        Optional<ProjectEntity> projectEntity = projectsRepository.findById(projectRequest.getProjectId());
-        ProjectStatusEntity projectStatusEntity = projectStatusRepository.findByName(PROJECT_PENDING_STATUS).orElseThrow(() -> new InvalidArgumentException(INVALID_STATUS));
-        if(!projectEntity.isPresent()) {
-            projectsRepository.save(postProjectRequestMapper.map(projectRequest, projectStatusEntity));
-        } else {
-            throw new ResourceAlreadyExistsException(EXISTING_PROJECT_ERROR_MESSAGE);
-        }
-        return metaResponseMapper.map(POST_PROJECT_SUCCESS_MESSAGE);
-    }
-
-    /** update project */
-    public UpdateProjectResponse updateProjectDetails(ProjectRequest projectRequest) {
-        ProjectEntity projectEntity = projectsRepository.findById(projectRequest.getProjectId()).orElseThrow(() -> new ResourceNotFoundException(MISSING_PROJECT_ERROR));
-        ProjectStatusEntity projectStatusEntity = projectStatusRepository.findByName(PROJECT_IN_PROGRESS_STATUS).orElseThrow(() -> new InvalidArgumentException(INVALID_STATUS));
-        projectEntity.setStatus(projectStatusEntity);
-        try {
-            projectEntity = projectsRepository.save(updateProjectRequestMapper.mapUpdate(projectRequest, projectEntity));
-        } catch(DataIntegrityViolationException e) {
-            throw new ServiceException("Error updating project details: " + e.getMessage(), e);
-        }
-        return updateProjectResponseMapper.mapUpdateResponse(projectEntity);
-    }
-
-    /** update project status */
-    public UpdateProjectResponse updateProjectStatus(ProjectRequest projectRequest) {
-        ProjectEntity projectEntity = projectsRepository.findById(projectRequest.getProjectId()).orElseThrow(() -> new ResourceAlreadyExistsException(MISSING_PROJECT_ERROR));
-        ProjectStatusEntity projectStatusEntity = projectStatusRepository.findByName(projectRequest.getStatus()).orElseThrow(() -> new InvalidArgumentException(INVALID_STATUS));
-        projectEntity.setStatus(projectStatusEntity);
-        if(COMPLETED_PROJECT_STATUSES.contains(projectRequest.getStatus())) {
-            projectEntity.setEndDate(LocalDate.now());
-        }
-        projectsRepository.save(updateProjectRequestMapper.mapUpdate(projectRequest, projectEntity));
-        return updateProjectResponseMapper.mapUpdateResponse(projectEntity);
-    }
-
-    /** delete a project */
-    public MetaResponse deleteProject(Long projectId) {
-        Optional<ProjectEntity> projectEntity = projectsRepository.findById(projectId);
-        if(projectEntity.isPresent()) {
-            projectsRepository.deleteById(projectId);
-        } else {
-            throw new ResourceNotFoundException(MISSING_PROJECT_ERROR);
-        }
-        return metaResponseMapper.map(DELETE_PROJECT_SUCCESS_MESSAGE);
-    }
+    MetaResponse deleteProject(Long projectId);
 }

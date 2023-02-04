@@ -16,7 +16,7 @@ public class MainApplication {
          * it creates an ApplicationContext instance
          *
          * */
-        SpringApplication.run(MainApplication.class);
+        SpringApplication.run(MainApplication.class, args);
     }
 
     /** below we are using CommandLineRunner interface to retrie all beans created by me or provided by spring boot, sorting and printing them
