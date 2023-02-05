@@ -5,6 +5,7 @@ import com.project.content.model.website.WebsitesData;
 import com.project.content.model.website.WebsitesRequest;
 import com.project.content.model.website.WebsitesResponse;
 import com.project.content.service.WebsiteService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,13 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = "/api/websites")
+@RequiredArgsConstructor
 public class WebsitesController {
 
     private final WebsiteService websiteService;
-
-    public WebsitesController(WebsiteService websiteService) {
-        this.websiteService = websiteService;
-    }
 
     @GetMapping
     public ResponseEntity<WebsitesResponse> getWebsites() {

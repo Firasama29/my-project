@@ -6,6 +6,7 @@ import com.project.content.model.topics.TopicsData;
 import com.project.content.model.topics.TopicsResponse;
 import com.project.content.model.topics.UpdateTopicResponse;
 import com.project.content.service.TopicsService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,13 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = "/api/topics")
+@RequiredArgsConstructor
 public class TopicsController {
 
     private final TopicsService topicsService;
-
-    public TopicsController(TopicsService topicsService) {
-        this.topicsService = topicsService;
-    }
 
     /** get list of topics */
     @GetMapping

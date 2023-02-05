@@ -3,6 +3,7 @@ package com.project.content.cache;
 import com.project.content.entity.BlogsEntity;
 import com.project.content.exception.ResourceNotFoundException;
 import com.project.content.repository.BlogRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,15 +16,12 @@ import static com.project.content.constants.ProjectConstants.MISSING_BLOG_ERROR;
 import static com.project.content.utils.ContentUtils.getTags;
 
 @Service
+@RequiredArgsConstructor
 public class BlogsCache {
 
-    private BlogRepository blogRepository;
+    private final BlogRepository blogRepository;
 
     private List<BlogsEntity> blogsEntities = new ArrayList<>();
-
-    public BlogsCache(BlogRepository blogRepository) {
-        this.blogRepository = blogRepository;
-    }
 
     @PostConstruct
     @Transactional(readOnly = true)

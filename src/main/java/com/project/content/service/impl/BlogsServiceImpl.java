@@ -16,6 +16,7 @@ import com.project.content.mapper.blogs.BlogsRequestMapper;
 import com.project.content.model.blogs.BlogsResponse;
 import com.project.content.repository.BlogRepository;
 import com.project.content.service.BlogsService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,6 +28,7 @@ import static com.project.content.constants.ProjectConstants.MISSING_BLOG_ERROR;
 import static com.project.content.constants.ProjectConstants.POST_BLOG_SUCCESS_MESSAGE;
 
 @Service
+@RequiredArgsConstructor
 public class BlogsServiceImpl implements BlogsService {
 
     private final BlogRepository blogRepository;
@@ -37,19 +39,6 @@ public class BlogsServiceImpl implements BlogsService {
     private final BlogsRequestMapper blogsRequestMapper;
     private final UpdateBlogsRequestMapper updateBlogsRequestMapper;
     private final UpdateBlogsResponseMapper updateBlogsResponseMapper;
-
-    public BlogsServiceImpl(BlogRepository blogRepository, BlogsCache blogsCache, BlogsResponseMapper blogsResponseMapper, BlogsDataMapper blogsDataMapper,
-                            BlogsRequestMapper blogsRequestMapper, MetaResponseMapper metaResponseMapper, UpdateBlogsRequestMapper updateBlogsRequestMapper,
-                            UpdateBlogsResponseMapper updateBlogsResponseMapper) {
-        this.blogRepository = blogRepository;
-        this.blogsCache = blogsCache;
-        this.blogsResponseMapper = blogsResponseMapper;
-        this.blogsDataMapper = blogsDataMapper;
-        this.blogsRequestMapper = blogsRequestMapper;
-        this.metaResponseMapper = metaResponseMapper;
-        this.updateBlogsRequestMapper = updateBlogsRequestMapper;
-        this.updateBlogsResponseMapper = updateBlogsResponseMapper;
-    }
 
     @Override
     public BlogsResponse findListOfBlogs() {

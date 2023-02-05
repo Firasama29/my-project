@@ -17,6 +17,7 @@ import com.project.content.model.project.ProjectData;
 import com.project.content.model.project.ProjectListResponse;
 import com.project.content.repository.ProjectStatusRepository;
 import com.project.content.service.ProjectService;
+import lombok.RequiredArgsConstructor;
 import org.hibernate.service.spi.ServiceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,6 +40,7 @@ import static com.project.content.constants.ProjectConstants.PROJECT_IN_PROGRESS
 import static com.project.content.constants.ProjectConstants.PROJECT_PENDING_STATUS;
 
 @Service
+@RequiredArgsConstructor
 public class ProjectServiceImpl implements ProjectService {
 
     private final ProjectsRepository projectsRepository;
@@ -48,17 +50,6 @@ public class ProjectServiceImpl implements ProjectService {
     private final PostProjectRequestMapper postProjectRequestMapper;
     private final UpdateProjectRequestMapper updateProjectRequestMapper;
     private final UpdateProjectResponseMapper updateProjectResponseMapper;
-
-    public ProjectServiceImpl(ProjectsRepository projectsRepository, ProjectStatusRepository projectStatusRepository, ProjectListMapper projectListMapper, MetaResponseMapper metaResponseMapper, PostProjectRequestMapper postProjectRequestMapper,
-                              UpdateProjectResponseMapper updateProjectResponseMapper, UpdateProjectRequestMapper updateProjectRequestMapper) {
-        this.projectsRepository = projectsRepository;
-        this.projectStatusRepository = projectStatusRepository;
-        this.projectListMapper = projectListMapper;
-        this.metaResponseMapper = metaResponseMapper;
-        this.postProjectRequestMapper = postProjectRequestMapper;
-        this.updateProjectRequestMapper = updateProjectRequestMapper;
-        this.updateProjectResponseMapper = updateProjectResponseMapper;
-    }
 
     Logger log = LoggerFactory.getLogger(ProjectServiceImpl.class);
 

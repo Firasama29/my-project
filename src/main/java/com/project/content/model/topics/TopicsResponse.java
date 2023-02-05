@@ -1,16 +1,18 @@
 package com.project.content.model.topics;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.List;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class TopicsResponse {
 
     private List<TopicsData> topicsData;
 
-    public List<TopicsData> getTopicsData() {
-        return topicsData;
-    }
-
-    public void setTopicsData(List<TopicsData> topicsData) {
-        this.topicsData = topicsData;
-    }
 }

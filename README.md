@@ -41,7 +41,7 @@ This project consists of microservices
 - @Query                                     -  pending
 - @Embeddable and composite key              -  pending
 - caching(topics, blogs)                     -  in-progress
-- lombok                                     -  pending
+- lombok                                     -  done
 - Unit tests                                 -  pending
 - Design patterns                            -  pending
   - builder pattern                          -  pending

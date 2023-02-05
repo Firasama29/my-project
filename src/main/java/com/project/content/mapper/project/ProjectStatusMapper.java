@@ -20,7 +20,6 @@ public class ProjectStatusMapper {
         return projectListResponse;
     }
 
-
     public List<ProjectData> mapData(List<ProjectEntity> projectEntities) {
         return projectEntities.stream().map(this::mapByStatus).collect(Collectors.toList());
     }

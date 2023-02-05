@@ -1,30 +1,18 @@
 package com.project.content.model.project;
 
 import com.project.content.model.project.ProjectData;
-import org.springframework.stereotype.Component;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Component
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class UpdateProjectResponse {
 
     private String message;
 
     private ProjectData projectData;
-
-    public UpdateProjectResponse() {}
-
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public ProjectData getProjectData() {
-        return projectData;
-    }
-
-    public void setProjectData(ProjectData projectData) {
-        this.projectData = projectData;
-    }
 }

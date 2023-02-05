@@ -1,24 +1,18 @@
 package com.project.content.model.topics;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class UpdateTopicResponse {
 
     private String message;
 
     private TopicsData topicsData;
 
-    public String getMessage() {
-        return message;
-    }
-
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    public TopicsData getTopicsData() {
-        return topicsData;
-    }
-
-    public void setTopicsData(TopicsData topicsData) {
-        this.topicsData = topicsData;
-    }
 }

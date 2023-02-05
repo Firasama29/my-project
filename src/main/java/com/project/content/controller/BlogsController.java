@@ -5,6 +5,7 @@ import com.project.content.model.blogs.BlogsData;
 import com.project.content.model.blogs.BlogsRequest;
 import com.project.content.model.blogs.BlogsResponse;
 import com.project.content.service.BlogsService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,13 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = "/api/blogs")
+@RequiredArgsConstructor
 public class BlogsController {
 
     private final BlogsService blogsService;
-
-    public BlogsController(BlogsService blogsService) {
-        this.blogsService = blogsService;
-    }
 
     @GetMapping
     public ResponseEntity<BlogsResponse> getListOfBlogs() {

@@ -6,6 +6,7 @@ import com.project.content.model.project.UpdateProjectResponse;
 import com.project.content.model.project.ProjectData;
 import com.project.content.model.project.ProjectListResponse;
 import com.project.content.service.ProjectService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,15 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/project")
-@Validated
+@RequiredArgsConstructor
 public class ProjectController {
 
     private final ProjectService projectService;
-
-    public ProjectController(ProjectService projectService) {
-        this.projectService = projectService;
-    }
-
 
     /** get all projects */
     @GetMapping

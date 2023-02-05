@@ -15,6 +15,7 @@ import com.project.content.model.website.WebsitesRequest;
 import com.project.content.model.website.WebsitesResponse;
 import com.project.content.repository.WebsitesRepository;
 import com.project.content.service.WebsiteService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,6 +27,7 @@ import static com.project.content.constants.ProjectConstants.MISSING_WEBSITE_ERR
 import static com.project.content.constants.ProjectConstants.POST_WEBSITE_SUCCESS_MESSAGE;
 
 @Service
+@RequiredArgsConstructor
 public class WebsitesServiceImpl implements WebsiteService {
 
     private final WebsitesRepository websitesRepository;
@@ -35,18 +37,6 @@ public class WebsitesServiceImpl implements WebsiteService {
     private final WebsitesRequestMapper websitesRequestMapper;
     private final UpdateWebsitesRequestMapper updateWebsitesRequestMapper;
     private final UpdateWebsitesResponseMapper updateWebsitesResponseMapper;
-
-    public WebsitesServiceImpl(WebsitesRepository websitesRepository, WebsitesResponseMapper websitesResponseMapper, WebsitesDataMapper websitesDataMapper,
-                               MetaResponseMapper metaResponseMapper, WebsitesRequestMapper websitesRequestMapper, UpdateWebsitesRequestMapper updateWebsitesRequestMapper,
-                               UpdateWebsitesResponseMapper updateWebsitesResponseMapper) {
-        this.websitesRepository = websitesRepository;
-        this.websitesResponseMapper = websitesResponseMapper;
-        this.websitesDataMapper = websitesDataMapper;
-        this.metaResponseMapper = metaResponseMapper;
-        this.websitesRequestMapper = websitesRequestMapper;
-        this.updateWebsitesRequestMapper = updateWebsitesRequestMapper;
-        this.updateWebsitesResponseMapper = updateWebsitesResponseMapper;
-    }
 
     @Override
     public WebsitesResponse getListOfWebsites() {

@@ -16,6 +16,7 @@ import com.project.content.model.topics.TopicsResponse;
 import com.project.content.model.topics.UpdateTopicResponse;
 import com.project.content.repository.TopicsRepository;
 import com.project.content.service.TopicsService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,6 +28,7 @@ import static com.project.content.constants.ProjectConstants.MISSING_TOPIC_ERROR
 import static com.project.content.constants.ProjectConstants.POST_TOPIC_SUCCESS_MESSAGE;
 
 @Service
+@RequiredArgsConstructor
 public class TopicsServiceImpl implements TopicsService {
 
     private final TopicsRepository topicsRepository;
@@ -36,17 +38,6 @@ public class TopicsServiceImpl implements TopicsService {
     private final MetaResponseMapper metaResponseMapper;
     private final UpdateTopicResponseMapper updateTopicResponseMapper;
     private final UpdateTopicRequestMapper updateTopicRequestMapper;
-
-    public TopicsServiceImpl(TopicsRepository topicsRepository, TopicsCache topicsCache, TopicsResponseMapper topicsResponseMapper, TopicRequestMapper topicRequestMapper, MetaResponseMapper metaResponseMapper,
-                             UpdateTopicResponseMapper updateTopicResponseMapper, UpdateTopicRequestMapper updateTopicRequestMapper) {
-        this.topicsRepository = topicsRepository;
-        this.topicsCache = topicsCache;
-        this.topicsResponseMapper = topicsResponseMapper;
-        this.topicRequestMapper = topicRequestMapper;
-        this.metaResponseMapper = metaResponseMapper;
-        this.updateTopicResponseMapper = updateTopicResponseMapper;
-        this.updateTopicRequestMapper = updateTopicRequestMapper;
-    }
 
     /** list all topics */
     @Override

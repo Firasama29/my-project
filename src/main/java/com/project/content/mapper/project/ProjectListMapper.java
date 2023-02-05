@@ -14,8 +14,6 @@ import static com.project.content.utils.ContentUtils.getTags;
 @Component
 public class ProjectListMapper {
 
-    //private TagsMapper tagsMapper;
-
     /** mapping data here */
     public ProjectListResponse map(List<ProjectEntity> projectEntities) {
         ProjectListResponse projectListResponse = new ProjectListResponse();

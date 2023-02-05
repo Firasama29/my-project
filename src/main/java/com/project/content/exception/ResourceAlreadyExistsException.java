@@ -1,14 +1,12 @@
 package com.project.content.exception;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
 public class ResourceAlreadyExistsException extends RuntimeException {
-
     private String message;
-
-    public ResourceAlreadyExistsException(){}
-
-    public ResourceAlreadyExistsException(String message){ this.message = message; }
-
-    public String getMessage() {
-        return this.message = message;
-    }
 }

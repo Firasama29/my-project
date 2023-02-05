@@ -1,22 +1,17 @@
 package com.project.content.model.blogs;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.util.List;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class BlogsResponse {
 
     private List<BlogsData> blogsData;
-
-    public BlogsResponse(){}
-
-    public BlogsResponse(List<BlogsData> blogsData){
-        this.blogsData = blogsData;
-    }
-
-    public List<BlogsData> getBlogsData() {
-        return this.blogsData;
-    }
-
-    public void setBlogsData(List<BlogsData> blogsData) {
-        this.blogsData = blogsData;
-    }
 }

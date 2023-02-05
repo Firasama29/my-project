@@ -20,7 +20,6 @@ public class UpdateProjectResponseMapper {
         return updateProjectResponse;
     }
 
-
     private ProjectData mapData(ProjectEntity existingEntity) {
         ProjectData projectData = new ProjectData();
         projectData.setProjectId(existingEntity.getId());

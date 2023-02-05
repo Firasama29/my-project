@@ -3,6 +3,7 @@ package com.project.content.cache;
 import com.project.content.entity.TopicsEntity;
 import com.project.content.exception.ResourceNotFoundException;
 import com.project.content.repository.TopicsRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -15,13 +16,10 @@ import static com.project.content.constants.ProjectConstants.MISSING_TOPIC_ERROR
 import static com.project.content.utils.ContentUtils.getTags;
 
 @Service
+@RequiredArgsConstructor
 public class TopicsCache {
 
     private final TopicsRepository topicsRepository;
-
-    public TopicsCache(TopicsRepository topicsRepository) {
-        this.topicsRepository = topicsRepository;
-    }
 
     List<TopicsEntity> topicsEntities = new ArrayList<>();
 

@@ -1,15 +1,15 @@
 package com.project.content.model;
 
-import org.springframework.stereotype.Component;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Component
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class MetaResponse {
 
     private String message;
-
-    public MetaResponse() {}
-
-    public String getMessage() { return this.message; }
-
-    public void setMessage(String message) { this.message = message; }
 }
