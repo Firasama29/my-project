@@ -7,35 +7,33 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.Objects;
 
 @Component
 public class UpdateProjectRequestMapper {
 
     public ProjectEntity mapUpdate(ProjectRequest projectRequest, ProjectEntity existingProjectEntity) {
-        ProjectEntity projectEntity = new ProjectEntity();
-        projectEntity.setId(existingProjectEntity.getId());
-        projectEntity.setName(StringUtils.isNotBlank(projectRequest.getProjectName()) ? projectRequest.getProjectName() : existingProjectEntity.getName());
-        projectEntity.setDescription(StringUtils.isNotBlank(projectRequest.getDescription()) ? projectRequest.getDescription() : existingProjectEntity.getDescription());
-        projectEntity.setStatus(existingProjectEntity.getStatus());
-        projectEntity.setStartDate(existingProjectEntity.getStartDate());
-        projectEntity.setUpdatedDate(LocalDate.now());
-        projectEntity.setEndDate(existingProjectEntity.getEndDate());
-        projectEntity.setTags(StringUtils.isNotBlank(projectRequest.getTags()) ? projectRequest.getTags() : existingProjectEntity.getTags());
-        return projectEntity;
+        return ProjectEntity.builder()
+                .id(existingProjectEntity.getId())
+                .name(StringUtils.isNotBlank(projectRequest.getProjectName()) ? projectRequest.getProjectName() : existingProjectEntity.getName())
+                .description(StringUtils.isNotBlank(projectRequest.getDescription()) ? projectRequest.getDescription() : existingProjectEntity.getDescription())
+                .status(existingProjectEntity.getStatus())
+                .startDate(existingProjectEntity.getStartDate())
+                .updatedDate(LocalDate.now())
+                .endDate(existingProjectEntity.getEndDate())
+                .tags(StringUtils.isNotBlank(projectRequest.getTags()) ? projectRequest.getTags() : existingProjectEntity.getTags())
+                .build();
     }
 
-    public ProjectEntity mapStatus(ProjectEntity existingProjectEntity, ProjectStatusEntity projectStatusEntity) {
-        ProjectEntity projectEntity = new ProjectEntity();
-        projectEntity.setId(existingProjectEntity.getId());
-        projectEntity.setStatus(projectStatusEntity);
-        return projectEntity;
-    }
-
-    public ProjectEntity mapEndDate(LocalDate endDate, ProjectEntity existingProjectEntity) {
-        ProjectEntity projectEntity = new ProjectEntity();
-        projectEntity.setId(existingProjectEntity.getId());
-        projectEntity.setEndDate(endDate);
-        return projectEntity;
+    public ProjectEntity mapUpdateStatus(ProjectEntity existingProjectEntity, ProjectStatusEntity projectStatusEntity) {
+        return ProjectEntity.builder()
+                .id(existingProjectEntity.getId())
+                .status(projectStatusEntity)
+                .name(existingProjectEntity.getName())
+                .description(existingProjectEntity.getDescription())
+                .startDate(existingProjectEntity.getStartDate())
+                .updatedDate(existingProjectEntity.getUpdatedDate())
+                .endDate(existingProjectEntity.getEndDate())
+                .tags(existingProjectEntity.getTags())
+                .build();
     }
 }

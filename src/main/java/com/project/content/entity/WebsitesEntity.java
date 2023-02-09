@@ -2,10 +2,8 @@ package com.project.content.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import java.io.Serializable;
-import java.util.List;
 
 @Entity
 @Table(name = "websites")
@@ -72,14 +70,55 @@ public class WebsitesEntity implements Serializable {
         this.tags = tags;
     }
 
-    @Override
-    public String toString() {
-        return "Websites{" +
-                "id=" + id +
-                ", url='" + url + '\'' +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", description='" + tags + '\'' +
-                '}';
+    public static WebsitesEntityBuilder builder() {
+        return new WebsitesEntityBuilder();
+    }
+
+    public static class WebsitesEntityBuilder {
+        private Long id;
+        private String title;
+        private String url;
+        private String description;
+        private String tags;
+
+        public WebsitesEntityBuilder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public WebsitesEntityBuilder title(String title) {
+            this.title = title;
+            return this;
+        }
+
+        public WebsitesEntityBuilder url(String url) {
+            this.url = url;
+            return this;
+        }
+
+        public WebsitesEntityBuilder description(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public WebsitesEntityBuilder tags(String tags) {
+            this.tags = tags;
+            return this;
+        }
+
+        public WebsitesEntity build() {
+            return new WebsitesEntity();
+        }
+
+        @Override
+        public String toString() {
+            return "Websites{" +
+                    "id=" + id +
+                    ", url='" + url + '\'' +
+                    ", title='" + title + '\'' +
+                    ", description='" + description + '\'' +
+                    ", description='" + tags + '\'' +
+                    '}';
+        }
     }
 }

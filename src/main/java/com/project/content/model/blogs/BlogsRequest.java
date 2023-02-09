@@ -1,7 +1,6 @@
 package com.project.content.model.blogs;
 
 public class BlogsRequest {
-
     private Long id;
 
     private String title;
@@ -11,6 +10,16 @@ public class BlogsRequest {
     private String description;
 
     private String tags;
+
+    public BlogsRequest() {}
+
+    public BlogsRequest(Long id, String title, String author, String description, String tags) {
+        this.id = id;
+        this.title = title;
+        this.author = author;
+        this.description = description;
+        this.tags = tags;
+    }
 
     public Long getId() {
         return id;
@@ -50,5 +59,46 @@ public class BlogsRequest {
 
     public void setTags(String tags) {
         this.tags = tags;
+    }
+
+    public static BlogsRequestBuilder builder() {
+        return new BlogsRequestBuilder();
+    }
+
+    public static class BlogsRequestBuilder {
+        private Long id;
+        private String title;
+        private String author;
+        private String description;
+        private String tags;
+
+        public BlogsRequestBuilder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public BlogsRequestBuilder title(String title) {
+            this.title = title;
+            return this;
+        }
+
+        public BlogsRequestBuilder author(String author) {
+            this.author = author;
+            return this;
+        }
+
+        public BlogsRequestBuilder description(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public BlogsRequestBuilder tags(String tags) {
+            this.tags = tags;
+            return this;
+        }
+
+        public BlogsRequest build() {
+            return new BlogsRequest(id, title, author, description, tags);
+        }
     }
 }

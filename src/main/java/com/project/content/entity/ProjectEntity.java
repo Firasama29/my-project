@@ -33,15 +33,15 @@ public class ProjectEntity implements Serializable {
 
     public ProjectEntity(){}
 
-    public ProjectEntity(Long id, String name, String description, String tags, LocalDate startDate, LocalDate updatedDate, LocalDate endDate, ProjectStatusEntity status) {
+    public ProjectEntity(Long id, String name, String description, ProjectStatusEntity status, String tags, LocalDate startDate, LocalDate updatedDate, LocalDate endDate) {
         this.id = id;
         this.name = name;
         this.description = description;
+        this.status = status;
         this.tags = tags;
         this.startDate = startDate;
         this.updatedDate = updatedDate;
         this.endDate = endDate;
-        this.status = status;
     }
 
     public Long getId() {
@@ -60,9 +60,21 @@ public class ProjectEntity implements Serializable {
         this.name = name;
     }
 
-    public String getDescription() { return this.description; }
+    public String getDescription() {
+        return description;
+    }
 
-    public void setDescription(String description) { this.description = description; }
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public ProjectStatusEntity getStatus() {
+        return status;
+    }
+
+    public void setStatus(ProjectStatusEntity status) {
+        this.status = status;
+    }
 
     public String getTags() {
         return tags;
@@ -96,25 +108,85 @@ public class ProjectEntity implements Serializable {
         this.endDate = endDate;
     }
 
-    public ProjectStatusEntity getStatus() {
-        return status;
+    public static ProjectEntityBuilder builder() {
+        return new ProjectEntityBuilder();
     }
 
-    public void setStatus(ProjectStatusEntity status) {
-        this.status = status;
-    }
+    public static class ProjectEntityBuilder {
+        private Long id;
 
-    @Override
-    public String toString() {
-        return "ProjectEntity{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", status='" + status + '\'' +
-                ", tags=" + tags +
-                ", startDate=" + startDate +
-                ", startDate=" + updatedDate +
-                ", endDate=" + endDate +
-                '}';
+        private String name;
+
+        private String description;
+
+        private ProjectStatusEntity status;
+
+        private String tags;
+
+        private LocalDate startDate;
+
+        private LocalDate updatedDate;
+
+        private LocalDate endDate;
+
+        public ProjectEntityBuilder() {}
+
+        public ProjectEntityBuilder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public ProjectEntityBuilder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public ProjectEntityBuilder description(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public ProjectEntityBuilder status(ProjectStatusEntity status) {
+            this.status = status;
+            return this;
+        }
+
+        public ProjectEntityBuilder tags(String tags) {
+            this.tags = tags;
+            return this;
+        }
+
+        public ProjectEntityBuilder startDate(LocalDate startDate) {
+            this.startDate = startDate;
+            return this;
+        }
+
+        public ProjectEntityBuilder updatedDate(LocalDate updatedDate) {
+            this.updatedDate = updatedDate;
+            return this;
+        }
+
+        public ProjectEntityBuilder endDate(LocalDate endDate) {
+            this.endDate = endDate;
+            return this;
+        }
+
+        public ProjectEntity build() {
+            return new ProjectEntity(id, name, description, status, tags, startDate, updatedDate, endDate);
+        }
+
+        @Override
+        public String toString() {
+            return "ProjectEntityBuilder{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", description='" + description + '\'' +
+                    ", status=" + status +
+                    ", tags='" + tags + '\'' +
+                    ", startDate=" + startDate +
+                    ", updatedDate=" + updatedDate +
+                    ", endDate=" + endDate +
+                    '}';
+        }
     }
 }

@@ -11,13 +11,13 @@ import static com.project.content.utils.ContentUtils.getTags;
 public class UpdateBlogsResponseMapper {
 
     public BlogsData mapResponse(BlogsEntity blogsEntity) {
-        BlogsData blogsData = new BlogsData();
-        blogsData.setId(blogsEntity.getId());
-        blogsData.setTitle(blogsEntity.getTitle());
-        blogsData.setUrl(blogsEntity.getUrl());
-        blogsData.setDescription(StringUtils.abbreviate(blogsEntity.getDescription(), 40));
-        blogsData.setAuthor(blogsEntity.getAuthor());
-        blogsData.setTags(getTags(blogsEntity.getTags()));
-        return blogsData;
+        return BlogsData.builder()
+            .id(blogsEntity.getId())
+            .title(blogsEntity.getTitle())
+            .url(blogsEntity.getUrl())
+            .description(StringUtils.abbreviate(blogsEntity.getDescription(), 40))
+            .author(blogsEntity.getAuthor())
+            .tags(getTags(blogsEntity.getTags()))
+            .build();
     }
 }

@@ -17,12 +17,12 @@ public class WebsitesDataMapper {
     }
 
     public WebsitesData mapWebsites(WebsitesEntity websitesEntity) {
-        WebsitesData websitesData = new WebsitesData();
-        websitesData.setId(websitesEntity.getId());
-        websitesData.setTitle(websitesEntity.getTitle());
-        websitesData.setUrl(websitesEntity.getUrl());
-        websitesData.setDescription(websitesEntity.getDescription());
-        websitesData.setTags(getTags(websitesEntity.getTags()));
-        return websitesData;
+        return WebsitesData.builder()
+                .id(websitesEntity.getId())
+                .title(websitesEntity.getTitle())
+                .url(websitesEntity.getUrl())
+                .description(websitesEntity.getDescription())
+                .tags(getTags(websitesEntity.getTags()))
+                .build();
     }
 }

@@ -5,9 +5,7 @@ import com.project.content.model.topics.TopicsData;
 import com.project.content.model.topics.TopicsResponse;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.project.content.utils.ContentUtils.getTags;
@@ -16,9 +14,9 @@ import static com.project.content.utils.ContentUtils.getTags;
 public class TopicsResponseMapper {
 
     public TopicsResponse map(List<TopicsEntity> topicsEntities) {
-        TopicsResponse topicsResponse = new TopicsResponse();
-        topicsResponse.setTopicsData(this.mapData(topicsEntities));
-        return topicsResponse;
+        return TopicsResponse.builder()
+                .topicsData(this.mapData(topicsEntities))
+                .build();
     }
 
     private List<TopicsData> mapData(List<TopicsEntity> topicsEntities) {
@@ -26,33 +24,33 @@ public class TopicsResponseMapper {
     }
 
     private TopicsData map(TopicsEntity topicsEntity) {
-        TopicsData topicsData = new TopicsData();
-        topicsData.setId(topicsEntity.getId());
-        topicsData.setTopic(topicsEntity.getName());
-        topicsData.setTags(getTags(topicsEntity.getTags()));
-        return topicsData;
+        return TopicsData.builder()
+                .id(topicsEntity.getId())
+                .topic(topicsEntity.getName())
+                .tags(getTags(topicsEntity.getTags()))
+                .build();
     }
 
     public TopicsData mapDataById(TopicsEntity topicsEntity) {
-        TopicsData topicsData = new TopicsData();
-        topicsData.setId(topicsEntity.getId());
-        topicsData.setTopic(topicsEntity.getName());
-        topicsData.setTags(getTags(topicsEntity.getTags()));
-        return topicsData;
+        return TopicsData.builder()
+                .id(topicsEntity.getId())
+                .topic(topicsEntity.getName())
+                .tags(getTags(topicsEntity.getTags()))
+                .build();
     }
 
     public TopicsData mapByName(TopicsEntity topicsEntity) {
-        TopicsData topicsData = new TopicsData();
-        topicsData.setId(topicsEntity.getId());
-        topicsData.setTopic(topicsEntity.getName());
-        topicsData.setTags(getTags(topicsEntity.getTags()));
-        return topicsData;
+        return TopicsData.builder()
+                .id(topicsEntity.getId())
+                .topic(topicsEntity.getName())
+                .tags(getTags(topicsEntity.getTags()))
+                .build();
     }
 
     public TopicsResponse mapByTags(List<TopicsEntity> topicsEntities) {
-        TopicsResponse topicsResponse = new TopicsResponse();
-        topicsResponse.setTopicsData(this.mapDataByTags(topicsEntities));
-        return topicsResponse;
+        return TopicsResponse.builder()
+                .topicsData(this.mapDataByTags(topicsEntities))
+                .build();
     }
 
     public List<TopicsData> mapDataByTags(List<TopicsEntity> topicsEntities) {
@@ -60,10 +58,10 @@ public class TopicsResponseMapper {
     }
 
     public TopicsData mapTopicsByTags(TopicsEntity topicsEntity) {
-        TopicsData topicsData = new TopicsData();
-        topicsData.setId(topicsEntity.getId());
-        topicsData.setTopic(topicsEntity.getName());
-        topicsData.setTags(getTags(topicsEntity.getTags()));
-        return topicsData;
+        return TopicsData.builder()
+                .id(topicsEntity.getId())
+                .topic(topicsEntity.getName())
+                .tags(getTags(topicsEntity.getTags()))
+                .build();
     }
 }

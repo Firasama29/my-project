@@ -48,12 +48,43 @@ public class TopicsEntity implements Serializable {
         this.tags = tags;
     }
 
-    @Override
-    public String toString() {
-        return "Topics{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", type='" + tags + '\'' +
-                '}';
+    public static TopicsEntityBuilder builder() {
+        return new TopicsEntityBuilder();
+    }
+
+    public static class TopicsEntityBuilder {
+        private Long id;
+        private String name;
+        private String tags;
+
+        public TopicsEntityBuilder() {}
+
+        public TopicsEntityBuilder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public TopicsEntityBuilder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public TopicsEntityBuilder tags(String tags) {
+            this.tags = tags;
+            return this;
+        }
+
+        public TopicsEntity build() {
+            return new TopicsEntity();
+        }
+
+        @Override
+        public String toString() {
+            return "TopicsEntityBuilder{" +
+                    "id=" + id +
+                    ", name='" + name + '\'' +
+                    ", tags='" + tags + '\'' +
+                    '}';
+        }
     }
 }

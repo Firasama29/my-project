@@ -11,13 +11,13 @@ import static com.project.content.utils.ContentUtils.setUrl;
 public class BlogsRequestMapper {
 
     public BlogsEntity mapRequest(BlogsRequest blogsRequest) {
-        BlogsEntity blogsEntity = new BlogsEntity();
-        blogsEntity.setId(blogsRequest.getId());
-        blogsEntity.setTitle(blogsRequest.getTitle());
-        blogsEntity.setUrl(setUrl(blogsRequest.getTitle()));
-        blogsEntity.setDescription(StringUtils.abbreviate(blogsRequest.getDescription(), 50));
-        blogsEntity.setAuthor(blogsRequest.getAuthor());
-        blogsEntity.setTags(blogsRequest.getTags());
-        return blogsEntity;
+        return BlogsEntity.builder()
+                .id(blogsRequest.getId())
+                .title(blogsRequest.getTitle())
+                .url(setUrl(blogsRequest.getTitle()))
+                .description(StringUtils.abbreviate(blogsRequest.getDescription(), 50))
+                .author(blogsRequest.getAuthor())
+                .tags(blogsRequest.getTags())
+                .build();
     }
 }

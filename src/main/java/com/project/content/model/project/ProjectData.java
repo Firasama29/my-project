@@ -1,78 +1,124 @@
 package com.project.content.model.project;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.project.content.entity.ProjectStatusEntity;
+
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
 public class ProjectData {
 
+    @JsonProperty
     private Long projectId;
+
+    @JsonProperty
     private String project;
 
+    @JsonProperty
     private String description;
 
+    @JsonProperty
+    private String status;
+
+    @JsonProperty
     private List<String> tags;
 
+    @JsonProperty
     private LocalDate startDate;
 
+    @JsonProperty
     private LocalDate updatedDate;
-
-    private String status;
 
     public ProjectData() {}
 
-    public Long getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(Long projectId) {
+    public ProjectData(Long projectId, String project, String description, String status, List<String> tags, LocalDate startDate, LocalDate updatedDate) {
         this.projectId = projectId;
-    }
-
-    public String getProject() {
-        return project;
-    }
-
-    public void setProject(String project) {
         this.project = project;
-    }
-
-    public List<String> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<String> tags) {
+        this.description = description;
+        this.status = status;
         this.tags = tags;
-    }
-
-    public LocalDate getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
-    }
-
-    public LocalDate getUpdatedDate() {
-        return updatedDate;
-    }
-
-    public void setUpdatedDate(LocalDate updatedDate) {
         this.updatedDate = updatedDate;
     }
 
-    public String getStatus() {
-        return status;
+    public static ProjectDataBuilder builder() {
+        return new ProjectDataBuilder();
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+    public static class ProjectDataBuilder {
+        private Long projectId;
 
-    public String getDescription() {
-        return description;
-    }
+        private String project;
 
-    public void setDescription(String description) {
-        this.description = description;
+        private String description;
+
+        private String status;
+
+        private List<String> tags;
+
+        private LocalDate startDate;
+
+        private LocalDate updatedDate;
+
+        private LocalDate endDate;
+
+        public ProjectDataBuilder() {}
+
+        public ProjectDataBuilder projectId(Long projectId) {
+            this.projectId = projectId;
+            return this;
+        }
+        public ProjectDataBuilder project(String project) {
+            this.project = project;
+            return this;
+        }
+
+        public ProjectDataBuilder description(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public ProjectDataBuilder status(String status) {
+            this.status = status;
+            return this;
+        }
+
+        public ProjectDataBuilder tags(List<String> tags) {
+            this.tags = tags;
+            return this;
+        }
+
+        public ProjectDataBuilder startDate(LocalDate startDate) {
+            this.startDate = startDate;
+            return this;
+        }
+
+        public ProjectDataBuilder updatedDate(LocalDate updatedDate) {
+            this.updatedDate = updatedDate;
+            return this;
+        }
+
+        public ProjectDataBuilder endDate(LocalDate endDate) {
+            this.endDate = endDate;
+            return this;
+        }
+
+        public ProjectData build() {
+            return new ProjectData(projectId, project, description, status, tags, startDate, updatedDate);
+        }
+
+        @Override
+        public String toString() {
+            return "ProjectDataBuilder{" +
+                    "projectId=" + projectId +
+                    ", project='" + project + '\'' +
+                    ", description='" + description + '\'' +
+                    ", status='" + status + '\'' +
+                    ", tags=" + tags +
+                    ", startDate=" + startDate +
+                    ", updatedDate=" + updatedDate +
+                    '}';
+        }
     }
 }

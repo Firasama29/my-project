@@ -46,11 +46,29 @@ public class ProjectStatusEntity {
         this.name = name;
     }
 
-    public List<ProjectEntity> getProjectEntity() {
-        return projectEntity;
+    public static ProjectStatusEntityBuilder builder() {
+        return new ProjectStatusEntityBuilder();
     }
 
-    public void setProjectEntity(List<ProjectEntity> projectEntity) {
-        this.projectEntity = projectEntity;
+    public static class ProjectStatusEntityBuilder {
+        private Long id;
+
+        private String name;
+
+        public ProjectStatusEntityBuilder() {}
+
+        public ProjectStatusEntityBuilder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public ProjectStatusEntityBuilder name(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public ProjectStatusEntity build() {
+            return new ProjectStatusEntity();
+        }
     }
 }

@@ -17,13 +17,13 @@ public class BlogsDataMapper {
     }
 
     public BlogsData mapBlogs(BlogsEntity blogsEntity) {
-        BlogsData blogsData = new BlogsData();
-        blogsData.setId(blogsEntity.getId());
-        blogsData.setTitle(blogsEntity.getTitle());
-        blogsData.setUrl(blogsEntity.getUrl());
-        blogsData.setAuthor(blogsEntity.getAuthor());
-        blogsData.setDescription(blogsEntity.getDescription());
-        blogsData.setTags(getTags(blogsEntity.getTags()));
-        return blogsData;
+        return BlogsData.builder()
+                .id(blogsEntity.getId())
+                .title(blogsEntity.getTitle())
+                .url(blogsEntity.getUrl())
+                .author(blogsEntity.getAuthor())
+                .description(blogsEntity.getDescription())
+                .tags(getTags(blogsEntity.getTags()))
+                .build();
     }
 }

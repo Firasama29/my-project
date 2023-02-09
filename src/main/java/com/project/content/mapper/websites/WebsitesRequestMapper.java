@@ -9,12 +9,12 @@ import org.springframework.stereotype.Component;
 public class WebsitesRequestMapper {
 
     public WebsitesEntity mapRequest(WebsitesRequest websitesRequest) {
-        WebsitesEntity websitesEntity = new WebsitesEntity();
-        websitesEntity.setId(websitesRequest.getId());
-        websitesEntity.setTitle(websitesRequest.getTitle());
-        websitesEntity.setUrl(websitesRequest.getUrl());
-        websitesEntity.setDescription(StringUtils.abbreviate(websitesRequest.getDescription(), 40));
-        websitesEntity.setTags(websitesRequest.getTags());
-        return websitesEntity;
+        return WebsitesEntity.builder()
+                .id(websitesRequest.getId())
+                .title(websitesRequest.getTitle())
+                .url(websitesRequest.getUrl())
+                .description(StringUtils.abbreviate(websitesRequest.getDescription(), 40))
+                .tags(websitesRequest.getTags())
+                .build();
     }
 }

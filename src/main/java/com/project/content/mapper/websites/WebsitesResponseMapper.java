@@ -15,8 +15,8 @@ public class WebsitesResponseMapper {
     }
 
     public WebsitesResponse mapResponse(List<WebsitesEntity> websitesEntities) {
-        WebsitesResponse websitesResponse = new WebsitesResponse();
-        websitesResponse.setWebsitesData(websitesDataMapper.mapData(websitesEntities));
-        return websitesResponse;
+        return WebsitesResponse.builder()
+                .websitesData(websitesDataMapper.mapData(websitesEntities))
+                .build();
     }
 }

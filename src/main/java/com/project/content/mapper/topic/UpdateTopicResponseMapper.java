@@ -12,17 +12,17 @@ import static com.project.content.utils.ContentUtils.getTags;
 public class UpdateTopicResponseMapper {
 
     public UpdateTopicResponse map(TopicsEntity topicsEntity) {
-        UpdateTopicResponse updateTopicResponse = new UpdateTopicResponse();
-        updateTopicResponse.setMessage(UPDATE_TOPIC_SUCCESS_MESSAGE);
-        updateTopicResponse.setTopicsData(this.mapData(topicsEntity));
-        return updateTopicResponse;
+        return UpdateTopicResponse.builder()
+            .message(UPDATE_TOPIC_SUCCESS_MESSAGE)
+            .topicsData(this.mapData(topicsEntity))
+            .build();
     }
 
     private TopicsData mapData(TopicsEntity topicsEntity) {
-        TopicsData topicsData = new TopicsData();
-        topicsData.setId(topicsEntity.getId());
-        topicsData.setTopic(topicsEntity.getName());
-        topicsData.setTags(getTags(topicsEntity.getTags()));
-        return topicsData;
+        return TopicsData.builder()
+            .id(topicsEntity.getId())
+            .topic(topicsEntity.getName())
+            .tags(getTags(topicsEntity.getTags()))
+            .build();
     }
 }

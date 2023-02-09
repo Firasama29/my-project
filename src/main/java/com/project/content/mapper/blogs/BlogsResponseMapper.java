@@ -1,7 +1,6 @@
 package com.project.content.mapper.blogs;
 
 import com.project.content.entity.BlogsEntity;
-import com.project.content.model.blogs.BlogsData;
 import com.project.content.model.blogs.BlogsResponse;
 import org.springframework.stereotype.Component;
 
@@ -17,8 +16,7 @@ public class BlogsResponseMapper {
     }
 
     public BlogsResponse map(List<BlogsEntity> blogsEntities) {
-        BlogsResponse blogsResponse = new BlogsResponse();
-        blogsResponse.setBlogsData(blogsDataMapper.mapData(blogsEntities));
-        return blogsResponse;
+        return BlogsResponse.builder()
+                .blogsData(blogsDataMapper.mapData(blogsEntities)).build();
     }
 }

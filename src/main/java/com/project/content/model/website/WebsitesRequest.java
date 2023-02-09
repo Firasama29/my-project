@@ -1,7 +1,6 @@
 package com.project.content.model.website;
 
 public class WebsitesRequest {
-
     private Long id;
 
     private String title;
@@ -11,6 +10,14 @@ public class WebsitesRequest {
     private String description;
 
     private String tags;
+
+    public WebsitesRequest(Long id, String title, String url, String description, String tags) {
+        this.id = id;
+        this.title = title;
+        this.url = url;
+        this.description = description;
+        this.tags = tags;
+    }
 
     public Long getId() {
         return id;
@@ -50,5 +57,48 @@ public class WebsitesRequest {
 
     public void setTags(String tags) {
         this.tags = tags;
+    }
+
+    public static WebsitesRequestBuilder builder() {
+        return new WebsitesRequestBuilder();
+    }
+
+    public static class WebsitesRequestBuilder {
+        private Long id;
+        private String title;
+        private String url;
+        private String description;
+        private String tags;
+
+        public WebsitesRequestBuilder() {}
+
+        public WebsitesRequestBuilder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public WebsitesRequestBuilder title(String title) {
+            this.title = title;
+            return this;
+        }
+
+        public WebsitesRequestBuilder url(String url) {
+            this.url = url;
+            return this;
+        }
+
+        public WebsitesRequestBuilder description(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public WebsitesRequestBuilder tags(String tags) {
+            this.tags = tags;
+            return this;
+        }
+
+        public WebsitesRequest build() {
+            return new WebsitesRequest(id, title, url, description, tags);
+        }
     }
 }

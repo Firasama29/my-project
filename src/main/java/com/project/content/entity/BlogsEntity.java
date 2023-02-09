@@ -81,15 +81,62 @@ public class BlogsEntity implements Serializable {
         this.tags = tags;
     }
 
-    @Override
-    public String toString() {
-        return "Blogs{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", url='" + url + '\'' +
-                ", description='" + description + '\'' +
-                ", author='" + author + '\'' +
-                ", tags=" + tags +
-                '}';
+    public static BlogsEntityBuilder builder() {
+        return new BlogsEntityBuilder();
+    }
+
+    public static class BlogsEntityBuilder {
+        private Long id;
+        private String title;
+        private String url;
+        private String description;
+        private String author;
+        private String tags;
+
+        public BlogsEntityBuilder id(Long id) {
+            this.id = id;
+            return this;
+        }
+
+        public BlogsEntityBuilder title(String title) {
+            this.title = title;
+            return this;
+        }
+
+        public BlogsEntityBuilder url(String url) {
+            this.url = url;
+            return this;
+        }
+
+        public BlogsEntityBuilder description(String description) {
+            this.description = description;
+            return this;
+        }
+
+        public BlogsEntityBuilder author(String author) {
+            this.author = author;
+            return this;
+        }
+
+        public BlogsEntityBuilder tags(String tags) {
+            this.tags = tags;
+            return this;
+        }
+
+        public BlogsEntity build() {
+            return new BlogsEntity();
+        }
+
+        @Override
+        public String toString() {
+            return "Blogs{" +
+                    "id=" + id +
+                    ", title='" + title + '\'' +
+                    ", url='" + url + '\'' +
+                    ", description='" + description + '\'' +
+                    ", author='" + author + '\'' +
+                    ", tags=" + tags +
+                    '}';
+        }
     }
 }

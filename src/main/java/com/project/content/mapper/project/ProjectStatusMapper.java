@@ -15,9 +15,9 @@ import static com.project.content.utils.ContentUtils.getTags;
 public class ProjectStatusMapper {
 
     public ProjectListResponse map(List<ProjectEntity> projectEntities) {
-        ProjectListResponse projectListResponse = new ProjectListResponse();
-        projectListResponse.setProjectData(this.mapData(projectEntities));
-        return projectListResponse;
+        return ProjectListResponse.builder()
+                .projectData(this.mapData(projectEntities))
+                .build();
     }
 
 
@@ -26,11 +26,12 @@ public class ProjectStatusMapper {
     }
 
     public ProjectData mapByStatus(ProjectEntity projectEntity) {
-        ProjectData projectData = new ProjectData();
-        projectData.setProjectId(projectEntity.getId());
-        projectData.setProject(projectEntity.getName());
-        projectData.setStatus(projectEntity.getStatus().getName());
-        projectData.setTags(Objects.nonNull(projectEntity.getTags()) ? getTags(projectEntity.getTags()) : null);
-        return projectData;
+        return ProjectData.builder()
+                .projectId(projectEntity.getId())
+                .project(projectEntity.getName())
+                .description(projectEntity.getDescription())
+                .status(projectEntity.getStatus().getName())
+                .tags(getTags(projectEntity.getTags()))
+                .build();
     }
 }

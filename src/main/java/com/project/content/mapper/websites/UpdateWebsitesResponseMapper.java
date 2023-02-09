@@ -10,12 +10,12 @@ import static com.project.content.utils.ContentUtils.getTags;
 public class UpdateWebsitesResponseMapper {
 
     public WebsitesData map(WebsitesEntity existingWebsiteEntity) {
-        WebsitesData websitesData = new WebsitesData();
-        websitesData.setId(existingWebsiteEntity.getId());
-        websitesData.setTitle(existingWebsiteEntity.getTitle());
-        websitesData.setUrl(existingWebsiteEntity.getUrl());
-        websitesData.setDescription(existingWebsiteEntity.getDescription());
-        websitesData.setTags(getTags(existingWebsiteEntity.getTags()));
-        return websitesData;
+        return WebsitesData.builder()
+                .id(existingWebsiteEntity.getId())
+                .title(existingWebsiteEntity.getTitle())
+                .url(existingWebsiteEntity.getUrl())
+                .description(existingWebsiteEntity.getDescription())
+                .tags(getTags(existingWebsiteEntity.getTags()))
+                .build();
     }
 }

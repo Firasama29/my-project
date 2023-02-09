@@ -8,10 +8,10 @@ import org.springframework.stereotype.Component;
 public class TopicRequestMapper {
 
     public TopicsEntity map(TopicRequest topicRequest) {
-        TopicsEntity topicsEntity = new TopicsEntity();
-        topicsEntity.setId(topicRequest.getId());
-        topicsEntity.setName(topicRequest.getTopic());
-        topicsEntity.setTags(topicRequest.getTags());
-        return topicsEntity;
+        return TopicsEntity.builder()
+                .id(topicRequest.getId())
+                .name(topicRequest.getTopic())
+                .tags(topicRequest.getTags())
+                .build();
     }
 }
