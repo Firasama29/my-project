@@ -10,7 +10,7 @@
 
     <groupId>com.project</groupId>
     <artifactId>content-service</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.3-SNAPSHOT</version>
     <name>my-projectEntity</name>
 
     <properties>
