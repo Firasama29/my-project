@@ -1,10 +1,8 @@
 package com.project.content.mapper.project;
 
 import com.project.content.entity.ProjectEntity;
-import com.project.content.model.project.ProjectRequest;
 import com.project.content.model.project.UpdateProjectResponse;
 import com.project.content.model.project.ProjectData;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import static com.project.content.constants.ProjectConstants.UPDATE_PROJECT_SUCCESS_MESSAGE;

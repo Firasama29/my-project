@@ -1,12 +1,12 @@
 package com.project.content.repository;
 
 import com.project.content.entity.ProjectStatusEntity;
+import com.project.content.entity.topic.TopicIdentity;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
 
 import java.util.Optional;
 
-public interface ProjectStatusRepository extends JpaRepository<ProjectStatusEntity, Long> {
+public interface ProjectStatusRepository extends JpaRepository<ProjectStatusEntity, TopicIdentity> {
 
     Optional<ProjectStatusEntity> findByName(String statusName);
 

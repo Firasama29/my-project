@@ -8,8 +8,6 @@ import org.springframework.stereotype.Component;
 import java.time.LocalDate;
 import java.util.Objects;
 
-import static com.project.content.constants.ProjectConstants.PROJECT_PENDING_STATUS;
-
 @Component
 public class PostProjectRequestMapper {
 
