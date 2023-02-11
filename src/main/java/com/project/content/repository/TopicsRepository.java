@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface TopicsRepository extends JpaRepository<TopicsEntity, Long> {
 
-    List<TopicsEntity> findByOrderByTopicIdentityName();
+    List<TopicsEntity> findByOrderByName();
 
 }

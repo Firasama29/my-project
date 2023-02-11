@@ -10,8 +10,8 @@ public class UpdateTopicRequestMapper {
 
     public TopicsEntity mapRequest(TopicRequest topicRequest, TopicsEntity existingTopicsEntity) {
         TopicsEntity topicsEntity = new TopicsEntity();
-        topicsEntity.getTopicIdentity().setId(existingTopicsEntity.getTopicIdentity().getId());
-        topicsEntity.getTopicIdentity().setName(StringUtils.isNotBlank(topicRequest.getTopic()) ? topicRequest.getTopic() : existingTopicsEntity.getTopicIdentity().getName());
+        topicsEntity.setId(existingTopicsEntity.getId());
+        topicsEntity.setName(StringUtils.isNotBlank(topicRequest.getTopic()) ? topicRequest.getTopic() : existingTopicsEntity.getName());
         topicsEntity.setTags(StringUtils.isNotBlank(topicRequest.getTags()) ? topicRequest.getTags() : existingTopicsEntity.getTags());
         return topicsEntity;
     }

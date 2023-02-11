@@ -6,8 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.IdClass;
 import javax.persistence.Table;
 
 @Getter
@@ -17,11 +18,14 @@ import javax.persistence.Table;
 @Builder
 @Entity
 @Table(name = "topics")
+@IdClass(TopicIdentity.class)
 public class TopicsEntity {
 
     /** to define a composite key */
-    @EmbeddedId
-    private TopicIdentity topicIdentity;
+    @Id
+    private Long id;
+    @Id
+    private String name;
 
     private String tags;
 }
