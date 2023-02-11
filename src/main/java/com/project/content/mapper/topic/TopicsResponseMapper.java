@@ -25,24 +25,24 @@ public class TopicsResponseMapper {
 
     private TopicsData map(TopicsEntity topicsEntity) {
         TopicsData topicsData = new TopicsData();
-        topicsData.setId(topicsEntity.getTopicIdentity().getId());
-        topicsData.setTopic(topicsEntity.getTopicIdentity().getName());
+        topicsData.setId(topicsEntity.getId());
+        topicsData.setTopic(topicsEntity.getName());
         topicsData.setTags(getTags(topicsEntity.getTags()));
         return topicsData;
     }
 
     public TopicsData mapDataById(TopicsEntity topicsEntity) {
         TopicsData topicsData = new TopicsData();
-        topicsData.setId(topicsEntity.getTopicIdentity().getId());
-        topicsData.setTopic(topicsEntity.getTopicIdentity().getName());
+        topicsData.setId(topicsEntity.getId());
+        topicsData.setTopic(topicsEntity.getName());
         topicsData.setTags(getTags(topicsEntity.getTags()));
         return topicsData;
     }
 
     public TopicsData mapByName(TopicsEntity topicsEntity) {
         TopicsData topicsData = new TopicsData();
-        topicsData.setId(topicsEntity.getTopicIdentity().getId());
-        topicsData.setTopic(topicsEntity.getTopicIdentity().getName());
+        topicsData.setId(topicsEntity.getId());
+        topicsData.setTopic(topicsEntity.getName());
         topicsData.setTags(getTags(topicsEntity.getTags()));
         return topicsData;
     }
@@ -59,8 +59,8 @@ public class TopicsResponseMapper {
 
     public TopicsData mapTopicsByTags(TopicsEntity topicsEntity) {
         TopicsData topicsData = new TopicsData();
-        topicsData.setId(topicsEntity.getTopicIdentity().getId());
-        topicsData.setTopic(topicsEntity.getTopicIdentity().getName());
+        topicsData.setId(topicsEntity.getId());
+        topicsData.setTopic(topicsEntity.getName());
         topicsData.setTags(getTags(topicsEntity.getTags()));
         return topicsData;
     }
