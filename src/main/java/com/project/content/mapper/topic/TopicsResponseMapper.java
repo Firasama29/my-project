@@ -1,13 +1,11 @@
 package com.project.content.mapper.topic;
 
-import com.project.content.entity.TopicsEntity;
+import com.project.content.entity.topic.TopicsEntity;
 import com.project.content.model.topics.TopicsData;
 import com.project.content.model.topics.TopicsResponse;
 import org.springframework.stereotype.Component;
 
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static com.project.content.utils.ContentUtils.getTags;
@@ -27,24 +25,24 @@ public class TopicsResponseMapper {
 
     private TopicsData map(TopicsEntity topicsEntity) {
         TopicsData topicsData = new TopicsData();
-        topicsData.setId(topicsEntity.getId());
-        topicsData.setTopic(topicsEntity.getName());
+        topicsData.setId(topicsEntity.getTopicIdentity().getId());
+        topicsData.setTopic(topicsEntity.getTopicIdentity().getName());
         topicsData.setTags(getTags(topicsEntity.getTags()));
         return topicsData;
     }
 
     public TopicsData mapDataById(TopicsEntity topicsEntity) {
         TopicsData topicsData = new TopicsData();
-        topicsData.setId(topicsEntity.getId());
-        topicsData.setTopic(topicsEntity.getName());
+        topicsData.setId(topicsEntity.getTopicIdentity().getId());
+        topicsData.setTopic(topicsEntity.getTopicIdentity().getName());
         topicsData.setTags(getTags(topicsEntity.getTags()));
         return topicsData;
     }
 
     public TopicsData mapByName(TopicsEntity topicsEntity) {
         TopicsData topicsData = new TopicsData();
-        topicsData.setId(topicsEntity.getId());
-        topicsData.setTopic(topicsEntity.getName());
+        topicsData.setId(topicsEntity.getTopicIdentity().getId());
+        topicsData.setTopic(topicsEntity.getTopicIdentity().getName());
         topicsData.setTags(getTags(topicsEntity.getTags()));
         return topicsData;
     }
@@ -61,8 +59,8 @@ public class TopicsResponseMapper {
 
     public TopicsData mapTopicsByTags(TopicsEntity topicsEntity) {
         TopicsData topicsData = new TopicsData();
-        topicsData.setId(topicsEntity.getId());
-        topicsData.setTopic(topicsEntity.getName());
+        topicsData.setId(topicsEntity.getTopicIdentity().getId());
+        topicsData.setTopic(topicsEntity.getTopicIdentity().getName());
         topicsData.setTags(getTags(topicsEntity.getTags()));
         return topicsData;
     }

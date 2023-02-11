@@ -1,6 +1,6 @@
 package com.project.content.mapper.topic;
 
-import com.project.content.entity.TopicsEntity;
+import com.project.content.entity.topic.TopicsEntity;
 import com.project.content.model.topics.TopicsData;
 import com.project.content.model.topics.UpdateTopicResponse;
 import org.springframework.stereotype.Component;
@@ -20,8 +20,8 @@ public class UpdateTopicResponseMapper {
 
     private TopicsData mapData(TopicsEntity topicsEntity) {
         TopicsData topicsData = new TopicsData();
-        topicsData.setId(topicsEntity.getId());
-        topicsData.setTopic(topicsEntity.getName());
+        topicsData.setId(topicsEntity.getTopicIdentity().getId());
+        topicsData.setTopic(topicsEntity.getTopicIdentity().getName());
         topicsData.setTags(getTags(topicsEntity.getTags()));
         return topicsData;
     }
