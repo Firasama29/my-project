@@ -17,7 +17,7 @@ public class UpdateBlogsResponseMapper {
         blogsData.setUrl(blogsEntity.getUrl());
         blogsData.setDescription(StringUtils.abbreviate(blogsEntity.getDescription(), 40));
         blogsData.setAuthor(blogsEntity.getAuthor());
-        blogsData.setTags(getTags(blogsEntity.getTags()));
+        blogsData.setTagList(getTags(blogsEntity.getTags()));
         return blogsData;
     }
 }

@@ -31,39 +31,39 @@ public class ProjectListMapper {
     /** actual mapping between data object and entity  */
     private ProjectData mapProject(ProjectEntity projectEntity) {
         ProjectData projectData = new ProjectData();
-        projectData.setProjectId(projectEntity.getId());
-        projectData.setProject(projectEntity.getName());
+        projectData.setId(projectEntity.getId());
+        projectData.setTitle(projectEntity.getTitle());
         projectData.setDescription(projectEntity.getDescription());
         projectData.setStatus(projectEntity.getStatus().getName());
         projectData.setStartDate(projectEntity.getStartDate());
         projectData.setUpdatedDate(projectEntity.getUpdatedDate());
-        projectData.setTags(Objects.nonNull(projectEntity.getTags()) ? getTags(projectEntity.getTags()) : null);
+        projectData.setTagList(Objects.nonNull(projectEntity.getTags()) ? getTags(projectEntity.getTags()) : null);
         return projectData;
     }
 
     /** map Data object to entity to display an object by id in response */
     public ProjectData mapDataById(ProjectEntity projectEntity) {
         ProjectData projectData = new ProjectData();
-        projectData.setProjectId(projectEntity.getId());
-        projectData.setProject(projectEntity.getName());
+        projectData.setId(projectEntity.getId());
+        projectData.setTitle(projectEntity.getTitle());
         projectData.setDescription(projectEntity.getDescription());
         projectData.setStartDate(projectEntity.getStartDate());
         projectData.setUpdatedDate(projectEntity.getUpdatedDate());
         projectData.setStatus(projectEntity.getStatus().getName());
-        projectData.setTags(Objects.nonNull(projectEntity.getTags()) ? getTags(projectEntity.getTags()) : null);
+        projectData.setTagList(Objects.nonNull(projectEntity.getTags()) ? getTags(projectEntity.getTags()) : null);
         return projectData;
     }
 
     /** map Data object to entity to display an object by name in response */
     public ProjectData mapDataByName(ProjectEntity projectEntity) {
         ProjectData projectData = new ProjectData();
-        projectData.setProjectId(projectEntity.getId());
-        projectData.setProject(projectEntity.getName());
+        projectData.setId(projectEntity.getId());
+        projectData.setTitle(projectEntity.getTitle());
         projectData.setDescription(projectEntity.getDescription());
         projectData.setStatus(projectEntity.getStatus().getName());
         projectData.setStartDate(projectEntity.getStartDate());
         projectData.setUpdatedDate(projectEntity.getUpdatedDate());
-        projectData.setTags(Objects.nonNull(projectEntity.getTags()) ? getTags(projectEntity.getTags()) : null);
+        projectData.setTagList(Objects.nonNull(projectEntity.getTags()) ? getTags(projectEntity.getTags()) : null);
         return projectData;
     }
 
@@ -80,13 +80,13 @@ public class ProjectListMapper {
 
     private ProjectData mapProjectsByTags(ProjectEntity projectEntity) {
         ProjectData projectData = new ProjectData();
-        projectData.setProjectId(projectEntity.getId());
-        projectData.setProject(projectEntity.getName());
+        projectData.setId(projectEntity.getId());
+        projectData.setTitle(projectEntity.getTitle());
         projectData.setDescription(projectEntity.getDescription());
         projectData.setStatus(projectEntity.getStatus().getName());
         projectData.setStartDate(projectEntity.getStartDate());
         projectData.setUpdatedDate(projectEntity.getUpdatedDate());
-        projectData.setTags(Objects.nonNull(projectEntity.getTags()) ? getTags(projectEntity.getTags()) : null);
+        projectData.setTagList(Objects.nonNull(projectEntity.getTags()) ? getTags(projectEntity.getTags()) : null);
         return projectData;
     }
 }

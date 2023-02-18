@@ -1,18 +1,12 @@
 package com.project.content.model.project;
 
+import com.project.content.model.common.CommonEntity;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotNull;
 
 @Component
-public class ProjectRequest {
-
-    private Long projectId;
-
-    @NotNull(message = "project name is required")
-    private String projectName;
-
-    private String description;
+public class ProjectRequest extends CommonEntity {
 
     private String startDate;
 
@@ -20,33 +14,7 @@ public class ProjectRequest {
 
     private String status;
 
-    private String tags;
-
     public ProjectRequest() {}
-
-    public Long getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(Long projectId) {
-        this.projectId = projectId;
-    }
-
-    public String getProjectName() {
-        return projectName;
-    }
-
-    public void setProjectName(String projectName) {
-        this.projectName = projectName;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public String getStartDate() {
         return startDate;
@@ -70,13 +38,5 @@ public class ProjectRequest {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public String getTags() {
-        return tags;
-    }
-
-    public void setTags(String tags) {
-        this.tags = tags;
     }
 }

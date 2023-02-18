@@ -23,7 +23,7 @@ public class BlogsDataMapper {
         blogsData.setUrl(blogsEntity.getUrl());
         blogsData.setAuthor(blogsEntity.getAuthor());
         blogsData.setDescription(blogsEntity.getDescription());
-        blogsData.setTags(getTags(blogsEntity.getTags()));
+        blogsData.setTagList(getTags(blogsEntity.getTags()));
         return blogsData;
     }
 }

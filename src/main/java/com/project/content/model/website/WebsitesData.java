@@ -1,58 +1,20 @@
 package com.project.content.model.website;
 
+import com.project.content.model.common.WebEntity;
+
 import java.util.List;
 
-public class WebsitesData {
+public class WebsitesData extends WebEntity {
 
-    private Long id;
-
-    private String title;
-
-    private String url;
-
-    private String description;
-
-    private List<String> tags;
+    private List<String> tagList;
 
     public WebsitesData() {}
 
-    public Long getId() {
-        return id;
+    public List<String> getTagList() {
+        return tagList;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public List<String> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<String> tags) {
-        this.tags = tags;
+    public void setTagList(List<String> tagList) {
+        this.tagList = tagList;
     }
 }

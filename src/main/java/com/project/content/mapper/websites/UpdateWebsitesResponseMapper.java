@@ -15,7 +15,7 @@ public class UpdateWebsitesResponseMapper {
         websitesData.setTitle(existingWebsiteEntity.getTitle());
         websitesData.setUrl(existingWebsiteEntity.getUrl());
         websitesData.setDescription(existingWebsiteEntity.getDescription());
-        websitesData.setTags(getTags(existingWebsiteEntity.getTags()));
+        websitesData.setTagList(getTags(existingWebsiteEntity.getTags()));
         return websitesData;
     }
 }

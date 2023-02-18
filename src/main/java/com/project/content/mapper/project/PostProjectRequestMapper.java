@@ -15,8 +15,8 @@ public class PostProjectRequestMapper {
 
     public ProjectEntity map(ProjectRequest projectRequest, ProjectStatusEntity projectStatusEntity) {
         ProjectEntity projectEntity = new ProjectEntity();
-        projectEntity.setId(projectRequest.getProjectId());
-        projectEntity.setName(projectRequest.getProjectName());
+        projectEntity.setId(projectRequest.getId());
+        projectEntity.setTitle(projectRequest.getTitle());
         projectEntity.setDescription(projectRequest.getDescription());
         projectEntity.setStatus(projectStatusEntity);
         projectEntity.setStartDate(Objects.nonNull(projectRequest.getStartDate()) ? LocalDate.parse(projectRequest.getStartDate()) : null);

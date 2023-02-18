@@ -7,7 +7,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.Objects;
 
 @Component
 public class UpdateProjectRequestMapper {
@@ -15,7 +14,7 @@ public class UpdateProjectRequestMapper {
     public ProjectEntity mapUpdate(ProjectRequest projectRequest, ProjectEntity existingProjectEntity) {
         ProjectEntity projectEntity = new ProjectEntity();
         projectEntity.setId(existingProjectEntity.getId());
-        projectEntity.setName(StringUtils.isNotBlank(projectRequest.getProjectName()) ? projectRequest.getProjectName() : existingProjectEntity.getName());
+        projectEntity.setTitle(StringUtils.isNotBlank(projectRequest.getTitle()) ? projectRequest.getTitle() : existingProjectEntity.getTitle());
         projectEntity.setDescription(StringUtils.isNotBlank(projectRequest.getDescription()) ? projectRequest.getDescription() : existingProjectEntity.getDescription());
         projectEntity.setStatus(existingProjectEntity.getStatus());
         projectEntity.setStartDate(existingProjectEntity.getStartDate());

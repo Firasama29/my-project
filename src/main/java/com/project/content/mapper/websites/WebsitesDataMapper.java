@@ -22,7 +22,7 @@ public class WebsitesDataMapper {
         websitesData.setTitle(websitesEntity.getTitle());
         websitesData.setUrl(websitesEntity.getUrl());
         websitesData.setDescription(websitesEntity.getDescription());
-        websitesData.setTags(getTags(websitesEntity.getTags()));
+        websitesData.setTagList(getTags(websitesEntity.getTags()));
         return websitesData;
     }
 }

@@ -8,9 +8,9 @@ import java.util.Optional;
 
 public interface TopicsRepository extends JpaRepository<TopicsEntity, Long> {
 
-    List<TopicsEntity> findByOrderByName();
+    List<TopicsEntity> findByOrderByTitle();
 
-    Optional<TopicsEntity> findByName(String topicName);
+    Optional<TopicsEntity> findByTitle(String topicName);
 
     List<TopicsEntity> findByTags(String tags);
 }

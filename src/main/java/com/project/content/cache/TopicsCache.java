@@ -27,7 +27,7 @@ public class TopicsCache {
 
     @PostConstruct
     public void init() {
-        topicsEntities = topicsRepository.findByOrderByName();
+        topicsEntities = topicsRepository.findByOrderByTitle();
     }
 
     public List<TopicsEntity> getAllTopics() {
@@ -39,7 +39,7 @@ public class TopicsCache {
     }
 
     public TopicsEntity filterTopicByName(String topicName) {
-        return topicsEntities.stream().filter(topic -> topic.getName().equals(topicName)).findFirst().orElseThrow(() -> new ResourceNotFoundException(MISSING_TOPIC_ERROR));
+        return topicsEntities.stream().filter(topic -> topic.getTitle().equals(topicName)).findFirst().orElseThrow(() -> new ResourceNotFoundException(MISSING_TOPIC_ERROR));
     }
 
     public List<TopicsEntity> filterByTags(String tags) {

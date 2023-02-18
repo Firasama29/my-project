@@ -1,36 +1,18 @@
 package com.project.content.model.topics;
 
+import com.project.content.model.common.CommonEntity;
+
 import java.util.List;
 
-public class TopicsData {
+public class TopicsData extends CommonEntity {
 
-    private Long id;
+    private List<String> tagList;
 
-    private String topic;
-
-    private List<String> tags;
-
-    public Long getId() {
-        return id;
+    public List<String> getTagList() {
+        return tagList;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTopic() {
-        return topic;
-    }
-
-    public void setTopic(String topic) {
-        this.topic = topic;
-    }
-
-    public List<String> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<String> tags) {
-        this.tags = tags;
+    public void setTagList(List<String> tagList) {
+        this.tagList = tagList;
     }
 }

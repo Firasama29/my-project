@@ -27,10 +27,10 @@ public class ProjectStatusMapper {
 
     public ProjectData mapByStatus(ProjectEntity projectEntity) {
         ProjectData projectData = new ProjectData();
-        projectData.setProjectId(projectEntity.getId());
-        projectData.setProject(projectEntity.getName());
+        projectData.setId(projectEntity.getId());
+        projectData.setTitle(projectEntity.getTitle());
         projectData.setStatus(projectEntity.getStatus().getName());
-        projectData.setTags(Objects.nonNull(projectEntity.getTags()) ? getTags(projectEntity.getTags()) : null);
+        projectData.setTagList(Objects.nonNull(projectEntity.getTags()) ? getTags(projectEntity.getTags()) : null);
         return projectData;
     }
 }

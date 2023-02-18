@@ -1,10 +1,8 @@
 package com.project.content.mapper.project;
 
 import com.project.content.entity.ProjectEntity;
-import com.project.content.model.project.ProjectRequest;
 import com.project.content.model.project.UpdateProjectResponse;
 import com.project.content.model.project.ProjectData;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import static com.project.content.constants.ProjectConstants.UPDATE_PROJECT_SUCCESS_MESSAGE;
@@ -20,16 +18,15 @@ public class UpdateProjectResponseMapper {
         return updateProjectResponse;
     }
 
-
     private ProjectData mapData(ProjectEntity existingEntity) {
         ProjectData projectData = new ProjectData();
-        projectData.setProjectId(existingEntity.getId());
-        projectData.setProject(existingEntity.getName());
+        projectData.setId(existingEntity.getId());
+        projectData.setTitle(existingEntity.getTitle());
         projectData.setDescription(existingEntity.getDescription());
         projectData.setStatus(existingEntity.getStatus().getName());
         projectData.setStartDate(existingEntity.getStartDate());
         projectData.setUpdatedDate(existingEntity.getUpdatedDate());
-        projectData.setTags(getTags(existingEntity.getTags()));
+        projectData.setTagList(getTags(existingEntity.getTags()));
         return projectData;
     }
 }

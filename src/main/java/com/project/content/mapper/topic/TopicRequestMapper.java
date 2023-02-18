@@ -10,7 +10,7 @@ public class TopicRequestMapper {
     public TopicsEntity map(TopicRequest topicRequest) {
         TopicsEntity topicsEntity = new TopicsEntity();
         topicsEntity.setId(topicRequest.getId());
-        topicsEntity.setName(topicRequest.getTopic());
+        topicsEntity.setTitle(topicRequest.getTitle());
         topicsEntity.setTags(topicRequest.getTags());
         return topicsEntity;
     }

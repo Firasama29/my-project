@@ -1,16 +1,13 @@
 package com.project.content.model.project;
 
+import com.project.content.model.common.CommonEntity;
+
 import java.time.LocalDate;
 import java.util.List;
 
-public class ProjectData {
+public class ProjectData extends CommonEntity {
 
-    private Long projectId;
-    private String project;
-
-    private String description;
-
-    private List<String> tags;
+    private List<String> tagList;
 
     private LocalDate startDate;
 
@@ -20,28 +17,13 @@ public class ProjectData {
 
     public ProjectData() {}
 
-    public Long getProjectId() {
-        return projectId;
+
+    public List<String> getTagList() {
+        return tagList;
     }
 
-    public void setProjectId(Long projectId) {
-        this.projectId = projectId;
-    }
-
-    public String getProject() {
-        return project;
-    }
-
-    public void setProject(String project) {
-        this.project = project;
-    }
-
-    public List<String> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<String> tags) {
-        this.tags = tags;
+    public void setTagList(List<String> tagList) {
+        this.tagList = tagList;
     }
 
     public LocalDate getStartDate() {
@@ -66,13 +48,5 @@ public class ProjectData {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 }

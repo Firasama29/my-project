@@ -21,8 +21,8 @@ public class UpdateTopicResponseMapper {
     private TopicsData mapData(TopicsEntity topicsEntity) {
         TopicsData topicsData = new TopicsData();
         topicsData.setId(topicsEntity.getId());
-        topicsData.setTopic(topicsEntity.getName());
-        topicsData.setTags(getTags(topicsEntity.getTags()));
+        topicsData.setTitle(topicsEntity.getTitle());
+        topicsData.setTagList(getTags(topicsEntity.getTags()));
         return topicsData;
     }
 }
