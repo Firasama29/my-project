@@ -36,8 +36,12 @@ public class WebsitesServiceImpl implements WebsiteService {
     private final UpdateWebsitesRequestMapper updateWebsitesRequestMapper;
     private final UpdateWebsitesResponseMapper updateWebsitesResponseMapper;
 
-    public WebsitesServiceImpl(WebsitesRepository websitesRepository, WebsitesResponseMapper websitesResponseMapper, WebsitesDataMapper websitesDataMapper,
-                               MetaResponseMapper metaResponseMapper, WebsitesRequestMapper websitesRequestMapper, UpdateWebsitesRequestMapper updateWebsitesRequestMapper,
+    public WebsitesServiceImpl(WebsitesRepository websitesRepository,
+                               WebsitesResponseMapper websitesResponseMapper,
+                               WebsitesDataMapper websitesDataMapper,
+                               MetaResponseMapper metaResponseMapper,
+                               WebsitesRequestMapper websitesRequestMapper,
+                               UpdateWebsitesRequestMapper updateWebsitesRequestMapper,
                                UpdateWebsitesResponseMapper updateWebsitesResponseMapper) {
         this.websitesRepository = websitesRepository;
         this.websitesResponseMapper = websitesResponseMapper;
@@ -81,7 +85,7 @@ public class WebsitesServiceImpl implements WebsiteService {
     @Override
     public MetaResponse addNewWebsites(WebsitesRequest websitesRequest) {
         Optional<WebsitesEntity> websitesEntity = websitesRepository.findById(websitesRequest.getId());
-        if(!websitesEntity.isPresent()) {
+        if(websitesEntity.isEmpty()) {
             websitesRepository.save(websitesRequestMapper.mapRequest(websitesRequest));
         } else {
             throw new ResourceAlreadyExistsException(EXISTING_WEBSITE_ERROR);

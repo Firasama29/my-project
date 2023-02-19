@@ -1,8 +1,10 @@
 package com.project.content.model.common;
 
 import javax.persistence.Column;
+import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotBlank;
 
+@MappedSuperclass
 public class WebEntity extends CommonEntity {
 
     @Column(name = "url")

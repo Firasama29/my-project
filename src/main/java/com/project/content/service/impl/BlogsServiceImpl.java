@@ -38,8 +38,13 @@ public class BlogsServiceImpl implements BlogsService {
     private final UpdateBlogsRequestMapper updateBlogsRequestMapper;
     private final UpdateBlogsResponseMapper updateBlogsResponseMapper;
 
-    public BlogsServiceImpl(BlogRepository blogRepository, BlogsCache blogsCache, BlogsResponseMapper blogsResponseMapper, BlogsDataMapper blogsDataMapper,
-                            BlogsRequestMapper blogsRequestMapper, MetaResponseMapper metaResponseMapper, UpdateBlogsRequestMapper updateBlogsRequestMapper,
+    public BlogsServiceImpl(BlogRepository blogRepository,
+                            BlogsCache blogsCache,
+                            BlogsResponseMapper blogsResponseMapper,
+                            BlogsDataMapper blogsDataMapper,
+                            BlogsRequestMapper blogsRequestMapper,
+                            MetaResponseMapper metaResponseMapper,
+                            UpdateBlogsRequestMapper updateBlogsRequestMapper,
                             UpdateBlogsResponseMapper updateBlogsResponseMapper) {
         this.blogRepository = blogRepository;
         this.blogsCache = blogsCache;

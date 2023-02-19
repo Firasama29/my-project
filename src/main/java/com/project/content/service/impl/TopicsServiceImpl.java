@@ -37,8 +37,13 @@ public class TopicsServiceImpl implements TopicsService {
     private final UpdateTopicResponseMapper updateTopicResponseMapper;
     private final UpdateTopicRequestMapper updateTopicRequestMapper;
 
-    public TopicsServiceImpl(TopicsRepository topicsRepository, TopicsCache topicsCache, TopicsResponseMapper topicsResponseMapper, TopicRequestMapper topicRequestMapper, MetaResponseMapper metaResponseMapper,
-                             UpdateTopicResponseMapper updateTopicResponseMapper, UpdateTopicRequestMapper updateTopicRequestMapper) {
+    public TopicsServiceImpl(TopicsRepository topicsRepository,
+                             TopicsCache topicsCache,
+                             TopicsResponseMapper topicsResponseMapper,
+                             TopicRequestMapper topicRequestMapper,
+                             MetaResponseMapper metaResponseMapper,
+                             UpdateTopicResponseMapper updateTopicResponseMapper,
+                             UpdateTopicRequestMapper updateTopicRequestMapper) {
         this.topicsRepository = topicsRepository;
         this.topicsCache = topicsCache;
         this.topicsResponseMapper = topicsResponseMapper;

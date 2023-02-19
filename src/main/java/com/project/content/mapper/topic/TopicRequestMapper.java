@@ -11,6 +11,7 @@ public class TopicRequestMapper {
         TopicsEntity topicsEntity = new TopicsEntity();
         topicsEntity.setId(topicRequest.getId());
         topicsEntity.setTitle(topicRequest.getTitle());
+        topicsEntity.setDescription(topicRequest.getDescription());
         topicsEntity.setTags(topicRequest.getTags());
         return topicsEntity;
     }

@@ -49,8 +49,13 @@ public class ProjectServiceImpl implements ProjectService {
     private final UpdateProjectRequestMapper updateProjectRequestMapper;
     private final UpdateProjectResponseMapper updateProjectResponseMapper;
 
-    public ProjectServiceImpl(ProjectsRepository projectsRepository, ProjectStatusRepository projectStatusRepository, ProjectListMapper projectListMapper, MetaResponseMapper metaResponseMapper, PostProjectRequestMapper postProjectRequestMapper,
-                              UpdateProjectResponseMapper updateProjectResponseMapper, UpdateProjectRequestMapper updateProjectRequestMapper) {
+    public ProjectServiceImpl(ProjectsRepository projectsRepository,
+                              ProjectStatusRepository projectStatusRepository,
+                              ProjectListMapper projectListMapper,
+                              MetaResponseMapper metaResponseMapper,
+                              PostProjectRequestMapper postProjectRequestMapper,
+                              UpdateProjectResponseMapper updateProjectResponseMapper,
+                              UpdateProjectRequestMapper updateProjectRequestMapper) {
         this.projectsRepository = projectsRepository;
         this.projectStatusRepository = projectStatusRepository;
         this.projectListMapper = projectListMapper;
