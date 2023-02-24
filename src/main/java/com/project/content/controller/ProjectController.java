@@ -64,14 +64,14 @@ public class ProjectController {
 
     /** update a project */
     @PutMapping
-    public ResponseEntity<UpdateProjectResponse> putProjectDetails(@RequestBody ProjectRequest projectRequest) {
-        return ResponseEntity.ok(projectService.updateProjectDetails(projectRequest));
+    public ResponseEntity<UpdateProjectResponse> putProjectDetails(@RequestBody ProjectRequest projectRequest, @RequestParam(name = "id") Long projectId) {
+        return ResponseEntity.ok(projectService.updateProjectDetails(projectRequest, projectId));
     }
 
     /** update project's status */
     @PutMapping(path = "/status")
-    public ResponseEntity<UpdateProjectResponse> putProjectStatus(@RequestBody ProjectRequest projectRequest) {
-        return ResponseEntity.ok(projectService.updateProjectStatus(projectRequest));
+    public ResponseEntity<UpdateProjectResponse> putProjectStatus(@RequestBody ProjectRequest projectRequest, @RequestParam(name = "id") Long projectId) {
+        return ResponseEntity.ok(projectService.updateProjectStatus(projectRequest, projectId));
     }
 
     /** delete a project by id */

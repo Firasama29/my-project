@@ -11,7 +11,7 @@ import java.util.Objects;
 @Component
 public class PostProjectRequestMapper {
 
-    public ProjectEntity map(ProjectRequest projectRequest, ProjectStatusEntity projectStatusEntity) {
+    public ProjectEntity mapRequest(ProjectRequest projectRequest, ProjectStatusEntity projectStatusEntity) {
         ProjectEntity projectEntity = new ProjectEntity();
         projectEntity.setId(projectRequest.getProjectId());
         projectEntity.setName(projectRequest.getProjectName());

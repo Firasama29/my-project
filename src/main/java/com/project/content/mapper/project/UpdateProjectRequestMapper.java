@@ -24,7 +24,7 @@ public class UpdateProjectRequestMapper {
         return projectEntity;
     }
 
-    public ProjectEntity mapStatus(ProjectEntity existingProjectEntity, ProjectStatusEntity projectStatusEntity) {
+    public ProjectEntity mapUpdateStatus(ProjectEntity existingProjectEntity, ProjectStatusEntity projectStatusEntity) {
         ProjectEntity projectEntity = new ProjectEntity();
         projectEntity.setId(existingProjectEntity.getId());
         projectEntity.setStatus(projectStatusEntity);

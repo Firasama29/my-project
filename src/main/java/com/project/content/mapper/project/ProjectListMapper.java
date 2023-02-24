@@ -15,7 +15,7 @@ import static com.project.content.utils.ContentUtils.getTags;
 public class ProjectListMapper {
 
     /** mapping data here */
-    public ProjectListResponse map(List<ProjectEntity> projectEntities) {
+    public ProjectListResponse mapResponse(List<ProjectEntity> projectEntities) {
         ProjectListResponse projectListResponse = new ProjectListResponse();
         projectListResponse.setProjectData(this.mapData(projectEntities));
         return projectListResponse;
@@ -27,7 +27,7 @@ public class ProjectListMapper {
     }
 
     /** actual mapping between data object and entity  */
-    private ProjectData mapProject(ProjectEntity projectEntity) {
+    public ProjectData mapProject(ProjectEntity projectEntity) {
         ProjectData projectData = new ProjectData();
         projectData.setProjectId(projectEntity.getId());
         projectData.setProject(projectEntity.getName());

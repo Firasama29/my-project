@@ -10,8 +10,6 @@ This project consists of microservices
 
 ```PENDING```
    * Unit tests
-   * lombok
-   * @Embeddable and composite key
    * custom validation annotation
    * jenkins pipeline
    * spring security
@@ -59,3 +57,5 @@ This project consists of microservices
    * Design patterns
       1. builder pattern
    * @Query
+   * lombok
+   * @Embeddable and composite key
