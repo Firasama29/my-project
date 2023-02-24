@@ -3,13 +3,15 @@ package com.project.content;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 import java.util.Arrays;
 
 @SpringBootApplication
-public class MainApplication {
+public class MainApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
         /** SpringApplication is used to bootstrap spring application from main method
@@ -33,5 +35,10 @@ public class MainApplication {
                 System.out.println(bean);
             }
         };
+    }
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(MainApplication.class);
     }
 }
