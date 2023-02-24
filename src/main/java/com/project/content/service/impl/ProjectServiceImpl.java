@@ -56,28 +56,28 @@ public class ProjectServiceImpl implements ProjectService {
     /** find projects */
     @Override
     public ProjectListResponse findProjects() {
-        return projectListMapper.mapResponse(projectsRepository.findByOrderByName());
+        return projectListMapper.map(projectsRepository.findByOrderByName());
     }
 
     /** find a project by id  */
     @Override
     public ProjectData findProjectById(Long id) {
         ProjectEntity projectEntity = projectsRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(MISSING_PROJECT_ERROR));
-        return projectListMapper.mapProject(projectEntity);
+        return projectListMapper.mapDataById(projectEntity);
     }
 
     /** find a project by name  */
     @Override
     public ProjectData findProjectByName(String name) {
         ProjectEntity projectEntityByName = projectsRepository.findByName(name).orElseThrow(() -> new ResourceNotFoundException(MISSING_PROJECT_ERROR));
-        return projectListMapper.mapProject(projectEntityByName);
+        return projectListMapper.mapDataByName(projectEntityByName);
     }
 
     /** find by status  */
     @Override
     public ProjectListResponse findProjectsByStatus(String status) {
         List<ProjectEntity> projectEntitiesByStatus = projectsRepository.findByStatusName(status);
-        return Objects.nonNull(projectEntitiesByStatus) ? projectListMapper.mapResponse(projectEntitiesByStatus) : new ProjectListResponse();
+        return Objects.nonNull(projectEntitiesByStatus) ? projectListMapper.map(projectEntitiesByStatus) : new ProjectListResponse();
     }
 
     /** find by tags  */
@@ -87,7 +87,7 @@ public class ProjectServiceImpl implements ProjectService {
         if(projectsByTags.isEmpty()) {
             throw new ResourceNotFoundException(MISSING_PROJECT_ERROR);
         }
-        return projectListMapper.mapResponse(projectsByTags);
+        return projectListMapper.mapTagsResponse(projectsByTags);
     }
 
     /** add a new project  */
@@ -96,7 +96,7 @@ public class ProjectServiceImpl implements ProjectService {
         Optional<ProjectEntity> projectEntity = projectsRepository.findById(projectRequest.getProjectId());
         ProjectStatusEntity projectStatusEntity = projectStatusRepository.findByName(PROJECT_PENDING_STATUS).orElseThrow(() -> new InvalidArgumentException(INVALID_STATUS));
         if(!projectEntity.isPresent()) {
-            projectsRepository.save(postProjectRequestMapper.mapRequest(projectRequest, projectStatusEntity));
+            projectsRepository.save(postProjectRequestMapper.map(projectRequest, projectStatusEntity));
         } else {
             throw new ResourceAlreadyExistsException(EXISTING_PROJECT_ERROR);
         }
@@ -105,8 +105,8 @@ public class ProjectServiceImpl implements ProjectService {
 
     /** update project */
     @Override
-    public UpdateProjectResponse updateProjectDetails(ProjectRequest projectRequest, Long projectId) {
-        ProjectEntity projectEntity = projectsRepository.findById(projectId).orElseThrow(() -> new ResourceNotFoundException(MISSING_PROJECT_ERROR));
+    public UpdateProjectResponse updateProjectDetails(ProjectRequest projectRequest) {
+        ProjectEntity projectEntity = projectsRepository.findById(projectRequest.getProjectId()).orElseThrow(() -> new ResourceNotFoundException(MISSING_PROJECT_ERROR));
         ProjectStatusEntity projectStatusEntity = projectStatusRepository.findByName(PROJECT_IN_PROGRESS_STATUS).orElseThrow(() -> new InvalidArgumentException(INVALID_STATUS));
         projectEntity.setStatus(projectStatusEntity);
         try {
@@ -119,13 +119,14 @@ public class ProjectServiceImpl implements ProjectService {
 
     /** update project status */
     @Override
-    public UpdateProjectResponse updateProjectStatus(ProjectRequest projectRequest, Long projectId) {
-        ProjectEntity projectEntity = projectsRepository.findById(projectId).orElseThrow(() -> new ResourceAlreadyExistsException(MISSING_PROJECT_ERROR));
+    public UpdateProjectResponse updateProjectStatus(ProjectRequest projectRequest) {
+        ProjectEntity projectEntity = projectsRepository.findById(projectRequest.getProjectId()).orElseThrow(() -> new ResourceAlreadyExistsException(MISSING_PROJECT_ERROR));
         ProjectStatusEntity projectStatusEntity = projectStatusRepository.findByName(projectRequest.getStatus()).orElseThrow(() -> new InvalidArgumentException(INVALID_STATUS));
+        projectEntity.setStatus(projectStatusEntity);
         if(COMPLETED_PROJECT_STATUSES.contains(projectRequest.getStatus())) {
             projectEntity.setEndDate(LocalDate.now());
         }
-        projectsRepository.save(updateProjectRequestMapper.mapUpdateStatus(projectEntity, projectStatusEntity));
+        projectsRepository.save(updateProjectRequestMapper.mapUpdate(projectRequest, projectEntity));
         return updateProjectResponseMapper.mapUpdateResponse(projectEntity);
     }
 

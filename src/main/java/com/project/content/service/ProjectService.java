@@ -20,9 +20,9 @@ public interface ProjectService {
 
     MetaResponse addProject(ProjectRequest projectRequest);
 
-    UpdateProjectResponse updateProjectDetails(ProjectRequest projectRequest, Long projectId);
+    UpdateProjectResponse updateProjectDetails(ProjectRequest projectRequest);
 
-    UpdateProjectResponse updateProjectStatus(ProjectRequest projectRequest, Long projectId);
+    UpdateProjectResponse updateProjectStatus(ProjectRequest projectRequest);
 
     MetaResponse deleteProject(Long projectId);
 }
