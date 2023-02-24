@@ -42,8 +42,7 @@ public class BlogsServiceImpl implements BlogsService {
 
     @Override
     public BlogsResponse findListOfBlogs() {
-        List<BlogsEntity> blogsEntities = blogsCache.getAllBlogs();
-        return blogsResponseMapper.map(blogsEntities);
+        return blogsResponseMapper.map(blogsCache.getAllBlogs());
     }
 
     @Override
